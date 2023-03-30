@@ -136,7 +136,7 @@
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -182,7 +182,7 @@
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -229,7 +229,7 @@
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -275,7 +275,7 @@
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -320,7 +320,7 @@
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -365,7 +365,7 @@
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -411,7 +411,7 @@
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -458,7 +458,7 @@
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -504,7 +504,7 @@
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -549,7 +549,7 @@
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -817,21 +817,67 @@ button {
   text-align: center;
   cursor: pointer;
   white-space: nowrap;
-  border-radius: 9px;
   padding: 8px 16px;
+  background-color: var(--second-background-color) !important;
+  border-radius: 14px !important;
+  padding: 12px 16px !important;
+  text-decoration: none !important;
+  padding: 0;
+  border-radius: 18px;
+  box-sizing: border-box;
   background: var(--background-color);
+  margin-bottom: 1rem;
+  box-shadow: var(--redefine-box-shadow);
+  box-shadow: var(--redefine-box-shadow-flat) !important;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   box-shadow: var(--redefine-box-shadow);
   transition-property: color, background, box-shadow, border-color, transform;
   transition-delay: 0s, 0s, 0s, 0s, 0s;
   transition-duration: 0.2s, 0.2s, 0.2s, 0.2s, 0.2s;
   transition-timing-function: ease, ease, ease, ease, linear;
 }
+@media (max-width: 780px) {
+  .btn {
+    margin-bottom: 0.8rem;
+  }
+}
+@media (max-width: 500px) {
+  .btn {
+    margin-bottom: 0.6rem;
+  }
+}
 .btn:hover {
   box-shadow: var(--redefine-box-shadow-hover);
 }
+@media (max-width: 780px) {
+  .btn {
+    padding: 0;
+    border-radius: 14.4px;
+  }
+}
+@media (max-width: 500px) {
+  .btn {
+    padding: 0;
+    border-radius: 10.799999999999999px;
+  }
+}
 .btn:hover {
-  color: var(--background-color);
-  background: var(--primary-color);
+  box-shadow: var(--redefine-box-shadow-hover);
+}
+.btn:hover,
+.btn:focus {
+  color: var(--primary-color);
+  background-color: var(--background-color) !important;
+  box-shadow: var(--redefine-box-shadow) !important;
+}
+.btn:active {
+  box-shadow: var(--redefine-box-shadow-flat) !important;
+  transform: translateY(3px);
+  transition: transform 0.1s ease;
+  background-color: var(--third-background-color) !important;
 }
 .flex-center {
   display: flex;
@@ -1108,7 +1154,7 @@ button {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -1154,7 +1200,7 @@ button {
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -1201,7 +1247,7 @@ button {
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -1247,7 +1293,7 @@ button {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -1292,7 +1338,7 @@ button {
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -1452,6 +1498,13 @@ pre,
 pre,
 code {
   font-family: "Ubuntu Mono", Courier, monospace;
+}
+pre.mermaid {
+  background-color: var(--background-color);
+}
+pre.mermaid svg {
+  display: block;
+  margin: auto;
 }
 code {
   padding: 4px;
@@ -1762,7 +1815,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -1808,7 +1861,7 @@ pre .deletion {
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -1855,7 +1908,7 @@ pre .deletion {
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -1901,7 +1954,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -1946,7 +1999,7 @@ pre .deletion {
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -2105,7 +2158,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -2151,7 +2204,7 @@ pre .deletion {
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -2198,7 +2251,7 @@ pre .deletion {
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -2244,7 +2297,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -2289,7 +2342,7 @@ pre .deletion {
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -2513,7 +2566,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -2559,7 +2612,7 @@ pre .deletion {
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -2606,7 +2659,7 @@ pre .deletion {
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -2652,7 +2705,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -2697,7 +2750,7 @@ pre .deletion {
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -3587,7 +3640,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -3633,7 +3686,7 @@ pre .deletion {
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -3680,7 +3733,7 @@ pre .deletion {
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -3726,7 +3779,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -3771,7 +3824,7 @@ pre .deletion {
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -4322,7 +4375,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -4368,7 +4421,7 @@ pre .deletion {
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -4415,7 +4468,7 @@ pre .deletion {
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -4461,7 +4514,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -4506,7 +4559,7 @@ pre .deletion {
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -4638,7 +4691,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -4684,7 +4737,7 @@ pre .deletion {
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -4731,7 +4784,7 @@ pre .deletion {
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -4777,7 +4830,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -4822,7 +4875,7 @@ pre .deletion {
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -5186,6 +5239,12 @@ pre .deletion {
   color: var(--background-color);
   background: var(--primary-color);
 }
+.paginator i.fa-regular {
+  color: var(--default-text-color);
+}
+.paginator .extend:hover i.fa-regular {
+  color: var(--background-color);
+}
 :root {
   --background-color: #fff;
   --background-color-transparent: rgba(255,255,255,0.6);
@@ -5199,7 +5258,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -5245,7 +5304,7 @@ pre .deletion {
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -5292,7 +5351,7 @@ pre .deletion {
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -5338,7 +5397,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -5383,7 +5442,7 @@ pre .deletion {
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -5571,7 +5630,7 @@ pre .deletion {
 .page-template-container .friends-link-container .friends-link-list .friends-link-item .content .info .name {
   width: 100%;
   height: 60%;
-  font-size: 1.28rem;
+  font-size: 1.1rem;
   color: var(--second-text-color);
 }
 @media (max-width: 780px) {
@@ -5581,13 +5640,12 @@ pre .deletion {
 }
 .page-template-container .friends-link-container .friends-link-list .friends-link-item .content .info .description {
   width: 100%;
-  height: 40%;
-  font-size: 1rem;
+  font-size: 0.98rem;
   color: var(--third-text-color);
 }
 @media (max-width: 780px) {
   .page-template-container .friends-link-container .friends-link-list .friends-link-item .content .info .description {
-    font-size: 0.98rem;
+    font-size: 0.95rem;
   }
 }
 .page-template-container .friends-link-container .friends-link-list .friends-link-item .content .info .ellipsis {
@@ -5664,7 +5722,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -5710,7 +5768,7 @@ pre .deletion {
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -5757,7 +5815,7 @@ pre .deletion {
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -5803,7 +5861,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -5848,7 +5906,7 @@ pre .deletion {
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -6051,7 +6109,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -6097,7 +6155,7 @@ pre .deletion {
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -6144,7 +6202,7 @@ pre .deletion {
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -6190,7 +6248,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -6235,7 +6293,7 @@ pre .deletion {
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -6346,16 +6404,7 @@ pre .deletion {
   font-size: 1rem;
   background: var(--third-background-color);
   border-radius: 14px;
-}
-.article-copyright-info-container::after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: '';
-  width: 6px;
-  height: 100%;
-  background: var(--copyright-info-color);
-  border-radius: 5px;
+  border: 1px solid var(--shadow-color-1);
 }
 .article-copyright-info-container ul {
   margin-left: 10px;
@@ -6386,7 +6435,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -6432,7 +6481,7 @@ pre .deletion {
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -6479,7 +6528,7 @@ pre .deletion {
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -6525,7 +6574,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -6570,7 +6619,7 @@ pre .deletion {
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -6811,7 +6860,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -6857,7 +6906,7 @@ pre .deletion {
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -6904,7 +6953,7 @@ pre .deletion {
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -6950,7 +6999,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -6995,7 +7044,7 @@ pre .deletion {
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -7227,13 +7276,13 @@ pre .deletion {
   color: var(--default-text-color);
 }
 .post-page-container .article-content-container .article-header .info .author .author-label {
-  margin-left: 10px;
+  margin-left: 5px;
   font-size: 0.8rem;
   font-weight: 500;
-  padding: 0 5px;
+  padding: 2px 8px;
   border-radius: 9px;
-  color: #fff;
-  background: var(--selection-color);
+  color: var(--third-text-color);
+  border: 1px solid var(--shadow-color-1);
 }
 .post-page-container .article-content-container .article-header,
 .post-page-container .article-content-container .article-header-meta-info {
@@ -7387,13 +7436,14 @@ pre .deletion {
   overflow: visible !important;
 }
 .post-page-container .article-content-container .recommended-article .recommended-article-header {
-  margin: 2rem 0 0.8rem 0;
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: 550;
+  margin-top: 2.8rem;
 }
 .post-page-container .article-content-container .recommended-article .recommended-article-group {
-  padding: 10px;
+  padding: 10px 0;
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   overflow: visible !important;
 }
@@ -7421,10 +7471,9 @@ pre .deletion {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  width: calc(100%/3 - 18px);
+  width: 32%;
   max-height: 200px;
   margin-top: 15px;
-  margin-left: 15px;
   margin-right: 0;
 }
 .post-page-container .article-content-container .recommended-article .recommended-article-group .recommended-article-item:hover {
@@ -7441,19 +7490,6 @@ pre .deletion {
     padding: 6px;
     border-radius: 10.799999999999999px;
   }
-}
-@media screen and (max-width: $device-tablet) {
-  .post-page-container .article-content-container .recommended-article .recommended-article-group .recommended-article-item {
-    width: calc(100%/2 - 18px);
-  }
-}
-@media screen and (max-width: $device-mobile) {
-  .post-page-container .article-content-container .recommended-article .recommended-article-group .recommended-article-item {
-    width: calc(100% - 18px);
-  }
-}
-.post-page-container .article-content-container .recommended-article .recommended-article-group .recommended-article-item:nth-child(3n+1) {
-  margin-left: 0 !important;
 }
 .post-page-container .article-content-container .recommended-article .recommended-article-group .recommended-article-item img {
   display: flex;
@@ -7516,7 +7552,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -7562,7 +7598,7 @@ pre .deletion {
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -7609,7 +7645,7 @@ pre .deletion {
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -7655,7 +7691,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -7700,7 +7736,7 @@ pre .deletion {
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -7799,7 +7835,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -7845,7 +7881,7 @@ pre .deletion {
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -7892,7 +7928,7 @@ pre .deletion {
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -7938,7 +7974,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -7983,7 +8019,7 @@ pre .deletion {
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -8211,7 +8247,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -8257,7 +8293,7 @@ pre .deletion {
     --fourth-text-color: #eaeced;
     --default-text-color: #373d3f;
     --invert-text-color: #bebec6;
-    --border-color: #b3b3b3;
+    --border-color: rgba(0,0,0,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(0,0,0,0.08);
     --shadow-color-2: rgba(0,0,0,0.05);
@@ -8304,7 +8340,7 @@ pre .deletion {
     --fourth-text-color: #242429;
     --default-text-color: #bebec6;
     --invert-text-color: #373d3f;
-    --border-color: #4a4c53;
+    --border-color: rgba(255,255,255,0.08);
     --selection-color: #be243c;
     --shadow-color-1: rgba(255,255,255,0.08);
     --shadow-color-2: rgba(255,255,255,0.05);
@@ -8350,7 +8386,7 @@ pre .deletion {
   --fourth-text-color: #eaeced;
   --default-text-color: #373d3f;
   --invert-text-color: #bebec6;
-  --border-color: #b3b3b3;
+  --border-color: rgba(0,0,0,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(0,0,0,0.08);
   --shadow-color-2: rgba(0,0,0,0.05);
@@ -8395,7 +8431,7 @@ pre .deletion {
   --fourth-text-color: #242429;
   --default-text-color: #bebec6;
   --invert-text-color: #373d3f;
-  --border-color: #4a4c53;
+  --border-color: rgba(255,255,255,0.08);
   --selection-color: #be243c;
   --shadow-color-1: rgba(255,255,255,0.08);
   --shadow-color-2: rgba(255,255,255,0.05);
@@ -9657,6 +9693,10 @@ a.button {
   margin-bottom: 1rem;
   box-shadow: var(--redefine-box-shadow);
   box-shadow: var(--redefine-box-shadow-flat) !important;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 @media (max-width: 780px) {
   a.button {
@@ -9683,12 +9723,16 @@ a.button:hover {
     border-radius: 10.799999999999999px;
   }
 }
-a.button:hover {
-  background-color: var(--third-background-color) !important;
+a.button:hover,
+a.button:focus {
+  box-shadow: var(--redefine-box-shadow) !important;
+  background-color: var(--background-color) !important;
 }
 a.button:active {
   transform: translateY(3px);
   transition: transform 0.1s ease;
+  box-shadow: var(--redefine-box-shadow-flat) !important;
+  background-color: var(--third-background-color) !important;
 }
 a.center {
   display: block;
