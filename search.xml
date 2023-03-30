@@ -1,27 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>1.2常量</title>
-    <url>/2023/03/30/1-2%E5%B8%B8%E9%87%8F/</url>
-    <content><![CDATA[<p> 常量的定义与变量的定义类似:</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> x1, y1 <span class="type">int</span> = <span class="number">123</span>, <span class="number">0x22</span></span><br><span class="line"><span class="keyword">const</span> s1 = <span class="string">&quot;hello,world&quot;</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	i, f = <span class="number">1</span>, <span class="number">0.123</span>		<span class="comment">//int, float(默认)</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+    <title>1.3枚举</title>
+    <url>/2023/03/30/1-3%E6%9E%9A%E4%B8%BE/</url>
+    <content><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>由于以后的案例可能会经常运用到枚举，</p>
+<p>所以提前带大家了解iota标识符。</p>
+<p>首先，Go语言中没有对enum的定义</p>
+<p>但是我们可以借助iota标识符实现一组自增变量值来实现枚举举例</p>
+<h2 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h2><div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    AA = <span class="literal">iota</span>  	<span class="comment">//0</span></span><br><span class="line">    BB       	<span class="comment">//1</span></span><br><span class="line">   	CC       	<span class="comment">//2</span></span><br><span class="line">    DD = <span class="literal">iota</span> + <span class="number">1</span>  	<span class="comment">//3 + 1 = 4</span></span><br><span class="line">    EE       		<span class="comment">//EE=5 没有重新定义iota 所以按照DD依次加一</span></span><br><span class="line">   )</span><br></pre></td></tr></table></figure></div>
 
-<p>可在代码块中定义常量，不曾使用的常量不会引发编译错误</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">const</span> x =<span class="number">123</span></span><br><span class="line">    <span class="built_in">println</span>(x)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> y = <span class="number">1.23</span>		<span class="comment">//未使用不会引发编译错误</span></span><br><span class="line">    </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">const</span> x = <span class="string">&quot;abc&quot;</span>		<span class="comment">//在不同作用域定义同名变量</span></span><br><span class="line">        <span class="built_in">println</span>(x)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>通过案例1，我们可以认识到iota标识符的使用。</p>
+<p>没有赋值的变量被标识iota后，默认初始值为0，</p>
+<p>下面的变量不必标识出来也会依次自增一</p>
+<h2 id="案例2"><a href="#案例2" class="headerlink" title="案例2"></a>案例2</h2><p>理解上述关系，下面列举案例二</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   	AA = <span class="literal">iota</span> &lt;br&gt;	<span class="comment">//0</span></span><br><span class="line">   	BB</span><br><span class="line">    CC</span><br><span class="line">   	DD = <span class="literal">iota</span> + <span class="number">1</span>   <span class="comment">//4</span></span><br><span class="line">   	EE            	<span class="comment">//5</span></span><br><span class="line">    FF = <span class="literal">iota</span> + <span class="number">2</span></span><br><span class="line">            <span class="comment">//FF = 7 这里是因为每次有变量声明iota标识符时，</span></span><br><span class="line">            <span class="comment">//将会从第一个被标识iota的变量开始计数，</span></span><br><span class="line">            <span class="comment">//并不会受到途中其他加减变量的影响。</span></span><br><span class="line">            <span class="comment">// 5 + 2 = 7</span></span><br><span class="line">    GG = <span class="literal">iota</span></span><br><span class="line">            <span class="comment">//GG = 6 这里由于GG重新声明了iota</span></span><br><span class="line">            <span class="comment">//所以又从第一次声明iota的位置枚举</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
 
-<p>输出</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">123</span></span><br><span class="line">abc</span><br></pre></td></tr></table></figure></div>
+<h2 id="案例3"><a href="#案例3" class="headerlink" title="案例3"></a>案例3</h2><p>下面通过案例三认识新的iota性质</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   AA, BB = <span class="literal">iota</span> + <span class="number">1</span>, <span class="literal">iota</span> + <span class="number">2</span>  <span class="comment">//AA=1,BB=2</span></span><br><span class="line">   CC, DD 						<span class="comment">//CC=1,DD=1</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
 
-<p>如果显式指定类型，必须确保常量左右值类型一致，需要时可做显式转换，<br>右键不能超出常量类型取值范围，否则会引发溢出错</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   x, k <span class="type">int</span>  = <span class="number">99</span>, <span class="number">-999</span></span><br><span class="line">   b    <span class="type">byte</span> = <span class="type">byte</span>(x)</span><br><span class="line">   <span class="comment">//x 为int类型，须显式转换byte类型</span></span><br><span class="line">   <span class="comment">//n = unit8(y)  错误  -999 overflows unit8</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+<p>iota的一个重要性质就是<strong>按照行枚举</strong>，也就是每行加一<br>所以第一行为 0 其他就依次可解决。</p>
+<p>但是我们常常使用枚举，不仅需要定义其各自变量的值，还可能需要描述信息<br>这时我们可以使用map映射达到如java的枚举效果</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> ColorMap = <span class="keyword">map</span>[<span class="type">int</span>]<span class="type">string</span>&#123;</span><br><span class="line">      ColorRed:       <span class="string">&quot;赤&quot;</span>,</span><br><span class="line">      ColorOrange:    <span class="string">&quot;橙&quot;</span>,</span><br><span class="line">      ColorYellow:    <span class="string">&quot;黄&quot;</span>,</span><br><span class="line">      ColorGrassland: <span class="string">&quot;绿&quot;</span>,</span><br><span class="line">      ColorCyan:      <span class="string">&quot;青&quot;</span>,</span><br><span class="line">      ColorBlue:      <span class="string">&quot;蓝&quot;</span>,</span><br><span class="line">      ColorPurple:    <span class="string">&quot;紫&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
-<p>常量也可以是某些编译器能计算出结果的表达式</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   ptrSize = unsafe.Sizeof(<span class="type">uintptr</span>(<span class="number">0</span>))</span><br><span class="line">   strSize = <span class="built_in">len</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">   <span class="comment">//uintptr 是 uint8 的别名，在所有方面都等效于 uint8。</span></span><br><span class="line">   <span class="comment">//按照惯例，它用于区分字节值和 8 位无符号整数值。</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;ptrSize: &quot;</span>, ptrSize) 	<span class="comment">//8</span></span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;strSize: &quot;</span>, strSize) 	<span class="comment">//11</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="案例4"><a href="#案例4" class="headerlink" title="案例4"></a>案例4</h2><p>iota默认自增类型为int类型，</p>
+<p>也可以手动更改显式指定类型，如：float</p>
+<p>如果更改显式类型，下面的变量即使不声明iota和显式类型，也会和最近的那个iota显式类型保持一致。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   a         = <span class="literal">iota</span> 	<span class="comment">//int (默认自增为 int 类型)</span></span><br><span class="line">   b <span class="type">float32</span> = <span class="literal">iota</span> 	<span class="comment">//float32 (可显式指定类型)</span></span><br><span class="line">   c         = <span class="literal">iota</span> 	<span class="comment">//int(如不显式指定iota,则与b数据类型相同)</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
 
-<p>在常量组中如果不指定类型和初始值，<br>则与上一行非空常值右值(表达式文本)相同</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   x2 <span class="type">uint16</span> = <span class="number">120</span></span><br><span class="line">   y2</span><br><span class="line">   s2 = <span class="string">&quot;abc&quot;</span></span><br><span class="line">   z2</span><br><span class="line">)</span><br><span class="line">fmt.Printf(<span class="string">&quot;%T,%v\n&quot;</span>, y2, y2) 	<span class="comment">//uint16,120</span></span><br><span class="line">fmt.Printf(<span class="string">&quot;%T,%v\n&quot;</span>, z2, z2) 	<span class="comment">//string,abc</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="案例5"><a href="#案例5" class="headerlink" title="案例5"></a>案例5</h2><p>如果中断iota自增，</p>
+<p>则必须显式恢复，后续自增序按照行序递增</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   a1 = <span class="literal">iota</span> 	<span class="comment">//0</span></span><br><span class="line">   b2</span><br><span class="line">   c2 = <span class="number">100</span> 	<span class="comment">//100</span></span><br><span class="line">   d        	<span class="comment">//100 (与上一行常量右值表达式相同)</span></span><br><span class="line">   e			<span class="comment">//100</span></span><br><span class="line">   f = <span class="literal">iota</span> 	<span class="comment">//恢复自增，计数包括c,d,e; f = 5</span></span><br><span class="line">   g			<span class="comment">// g = 6</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>1.4引用类型</title>
+    <url>/2023/03/30/1-4%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p>所谓引用类型特指slice、map、channel这三种预定义类型。</p>
+<p>拥有更复杂的存储结构，除了分配内存外，它们还须初始化一些了属性，</p>
+<p>诸如指针、长度、甚至包括哈希分布】数据队列等。</p>
+<p>内置函数<strong>new</strong>按指定类型长度分配0值内存，返回指针，并不关系你类型内部构造和初始化方式。</p>
+<p>而引用类型则必须使用<strong>make</strong>函数创建，编译器会将转换为目标类型专用的创造函数(或指令)，以确保完成全部内存分配和相关属性初始化。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkslice</span><span class="params">()</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">    s := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">    s = <span class="built_in">append</span>(s, <span class="number">100</span>)</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkmap</span><span class="params">()</span></span> <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span> &#123;</span><br><span class="line">    m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)</span><br><span class="line">    m[<span class="string">&quot;a&quot;</span>] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> m</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    p := <span class="built_in">new</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)	<span class="comment">//函数new返回指针</span></span><br><span class="line">    m := *p</span><br><span class="line">    fmt.Println(m)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
-<p>常量除了只读外，不同于变量可以定义运行期分配储存内存<br>常量通常会被编译器在预处理阶段直接展开，作为指令数据使用。</p>
+<p>虽然new函数为引用类型分配内存，但是是不完整创建。</p>
+<p>仅分配了所需内存用指针包装，并没有分配键值存储内存，也没有初始化散列桶等内部属性，无法正常工作。</p>
 ]]></content>
       <categories>
         <category>Golang</category>
@@ -74,59 +99,27 @@
       </categories>
   </entry>
   <entry>
-    <title>1.3枚举</title>
-    <url>/2023/03/30/1-3%E6%9E%9A%E4%B8%BE/</url>
-    <content><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>由于以后的案例可能会经常运用到枚举，</p>
-<p>所以提前带大家了解iota标识符。</p>
-<p>首先，Go语言中没有对enum的定义</p>
-<p>但是我们可以借助iota标识符实现一组自增变量值来实现枚举举例</p>
-<h2 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h2><div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    AA = <span class="literal">iota</span>  	<span class="comment">//0</span></span><br><span class="line">    BB       	<span class="comment">//1</span></span><br><span class="line">   	CC       	<span class="comment">//2</span></span><br><span class="line">    DD = <span class="literal">iota</span> + <span class="number">1</span>  	<span class="comment">//3 + 1 = 4</span></span><br><span class="line">    EE       		<span class="comment">//EE=5 没有重新定义iota 所以按照DD依次加一</span></span><br><span class="line">   )</span><br></pre></td></tr></table></figure></div>
+    <title>1.2常量</title>
+    <url>/2023/03/30/1-2%E5%B8%B8%E9%87%8F/</url>
+    <content><![CDATA[<p> 常量的定义与变量的定义类似:</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> x1, y1 <span class="type">int</span> = <span class="number">123</span>, <span class="number">0x22</span></span><br><span class="line"><span class="keyword">const</span> s1 = <span class="string">&quot;hello,world&quot;</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	i, f = <span class="number">1</span>, <span class="number">0.123</span>		<span class="comment">//int, float(默认)</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
 
-<p>通过案例1，我们可以认识到iota标识符的使用。</p>
-<p>没有赋值的变量被标识iota后，默认初始值为0，</p>
-<p>下面的变量不必标识出来也会依次自增一</p>
-<h2 id="案例2"><a href="#案例2" class="headerlink" title="案例2"></a>案例2</h2><p>理解上述关系，下面列举案例二</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   	AA = <span class="literal">iota</span> &lt;br&gt;	<span class="comment">//0</span></span><br><span class="line">   	BB</span><br><span class="line">    CC</span><br><span class="line">   	DD = <span class="literal">iota</span> + <span class="number">1</span>   <span class="comment">//4</span></span><br><span class="line">   	EE            	<span class="comment">//5</span></span><br><span class="line">    FF = <span class="literal">iota</span> + <span class="number">2</span></span><br><span class="line">            <span class="comment">//FF = 7 这里是因为每次有变量声明iota标识符时，</span></span><br><span class="line">            <span class="comment">//将会从第一个被标识iota的变量开始计数，</span></span><br><span class="line">            <span class="comment">//并不会受到途中其他加减变量的影响。</span></span><br><span class="line">            <span class="comment">// 5 + 2 = 7</span></span><br><span class="line">    GG = <span class="literal">iota</span></span><br><span class="line">            <span class="comment">//GG = 6 这里由于GG重新声明了iota</span></span><br><span class="line">            <span class="comment">//所以又从第一次声明iota的位置枚举</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+<p>可在代码块中定义常量，不曾使用的常量不会引发编译错误</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">const</span> x =<span class="number">123</span></span><br><span class="line">    <span class="built_in">println</span>(x)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> y = <span class="number">1.23</span>		<span class="comment">//未使用不会引发编译错误</span></span><br><span class="line">    </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">const</span> x = <span class="string">&quot;abc&quot;</span>		<span class="comment">//在不同作用域定义同名变量</span></span><br><span class="line">        <span class="built_in">println</span>(x)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
-<h2 id="案例3"><a href="#案例3" class="headerlink" title="案例3"></a>案例3</h2><p>下面通过案例三认识新的iota性质</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   AA, BB = <span class="literal">iota</span> + <span class="number">1</span>, <span class="literal">iota</span> + <span class="number">2</span>  <span class="comment">//AA=1,BB=2</span></span><br><span class="line">   CC, DD 						<span class="comment">//CC=1,DD=1</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+<p>输出</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">123</span></span><br><span class="line">abc</span><br></pre></td></tr></table></figure></div>
 
-<p>iota的一个重要性质就是<strong>按照行枚举</strong>，也就是每行加一<br>所以第一行为 0 其他就依次可解决。</p>
-<p>但是我们常常使用枚举，不仅需要定义其各自变量的值，还可能需要描述信息<br>这时我们可以使用map映射达到如java的枚举效果</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> ColorMap = <span class="keyword">map</span>[<span class="type">int</span>]<span class="type">string</span>&#123;</span><br><span class="line">      ColorRed:       <span class="string">&quot;赤&quot;</span>,</span><br><span class="line">      ColorOrange:    <span class="string">&quot;橙&quot;</span>,</span><br><span class="line">      ColorYellow:    <span class="string">&quot;黄&quot;</span>,</span><br><span class="line">      ColorGrassland: <span class="string">&quot;绿&quot;</span>,</span><br><span class="line">      ColorCyan:      <span class="string">&quot;青&quot;</span>,</span><br><span class="line">      ColorBlue:      <span class="string">&quot;蓝&quot;</span>,</span><br><span class="line">      ColorPurple:    <span class="string">&quot;紫&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>如果显式指定类型，必须确保常量左右值类型一致，需要时可做显式转换，<br>右键不能超出常量类型取值范围，否则会引发溢出错</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   x, k <span class="type">int</span>  = <span class="number">99</span>, <span class="number">-999</span></span><br><span class="line">   b    <span class="type">byte</span> = <span class="type">byte</span>(x)</span><br><span class="line">   <span class="comment">//x 为int类型，须显式转换byte类型</span></span><br><span class="line">   <span class="comment">//n = unit8(y)  错误  -999 overflows unit8</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
 
-<h2 id="案例4"><a href="#案例4" class="headerlink" title="案例4"></a>案例4</h2><p>iota默认自增类型为int类型，</p>
-<p>也可以手动更改显式指定类型，如：float</p>
-<p>如果更改显式类型，下面的变量即使不声明iota和显式类型，也会和最近的那个iota显式类型保持一致。</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   a         = <span class="literal">iota</span> 	<span class="comment">//int (默认自增为 int 类型)</span></span><br><span class="line">   b <span class="type">float32</span> = <span class="literal">iota</span> 	<span class="comment">//float32 (可显式指定类型)</span></span><br><span class="line">   c         = <span class="literal">iota</span> 	<span class="comment">//int(如不显式指定iota,则与b数据类型相同)</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+<p>常量也可以是某些编译器能计算出结果的表达式</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   ptrSize = unsafe.Sizeof(<span class="type">uintptr</span>(<span class="number">0</span>))</span><br><span class="line">   strSize = <span class="built_in">len</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">   <span class="comment">//uintptr 是 uint8 的别名，在所有方面都等效于 uint8。</span></span><br><span class="line">   <span class="comment">//按照惯例，它用于区分字节值和 8 位无符号整数值。</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;ptrSize: &quot;</span>, ptrSize) 	<span class="comment">//8</span></span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;strSize: &quot;</span>, strSize) 	<span class="comment">//11</span></span><br></pre></td></tr></table></figure></div>
 
-<h2 id="案例5"><a href="#案例5" class="headerlink" title="案例5"></a>案例5</h2><p>如果中断iota自增，</p>
-<p>则必须显式恢复，后续自增序按照行序递增</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   a1 = <span class="literal">iota</span> 	<span class="comment">//0</span></span><br><span class="line">   b2</span><br><span class="line">   c2 = <span class="number">100</span> 	<span class="comment">//100</span></span><br><span class="line">   d        	<span class="comment">//100 (与上一行常量右值表达式相同)</span></span><br><span class="line">   e			<span class="comment">//100</span></span><br><span class="line">   f = <span class="literal">iota</span> 	<span class="comment">//恢复自增，计数包括c,d,e; f = 5</span></span><br><span class="line">   g			<span class="comment">// g = 6</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
-]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>1.4引用类型</title>
-    <url>/2023/03/30/1-4%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>简述Go语言和博客目的</title>
-    <url>/2023/03/30/%E7%AE%80%E8%BF%B0Go%E8%AF%AD%E8%A8%80%E5%92%8C%E5%8D%9A%E5%AE%A2%E7%9B%AE%E7%9A%84/</url>
-    <content><![CDATA[<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>作为一个小白，对于go语言的理解是浅薄的，对go语言的优势劣势也并无能能力为大家解释清楚。</p>
-<p>所以由于本身是第一次接触go语言，我也只能尽自己的力量从0开始由基础向上迈步。</p>
-<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>个人还是以丰富自身巩固学习为前提，本Go博客栏的编写依照个人的学习和阅读。</p>
-<p>主要书籍是围绕<strong>Go语言程序设计</strong>和雨痕大大的<strong>Go语言学习笔记</strong></p>
-<p>所以举例的代码大多也从书中运行实践后摘抄分享</p>
-<h2 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h2><p>[Go语言中文网](<a class="link"   href="https://studygolang.com/" >首页 - Go语言中文网 - Golang中文社区 (studygolang.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)</p>
-<p>[Golang语言标准库文档](<a class="link"   href="https://studygolang.com/pkgdoc" >Go语言标准库文档中文版 | Go语言中文网 | Golang中文社区 | Golang中国 (studygolang.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)</p>
-<p>雨痕大大Go程序设计<a class="link"   href="https://www.yuque.com/qyuhen/go" >Go 程序设计 (yuque.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>在常量组中如果不指定类型和初始值，<br>则与上一行非空常值右值(表达式文本)相同</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   x2 <span class="type">uint16</span> = <span class="number">120</span></span><br><span class="line">   y2</span><br><span class="line">   s2 = <span class="string">&quot;abc&quot;</span></span><br><span class="line">   z2</span><br><span class="line">)</span><br><span class="line">fmt.Printf(<span class="string">&quot;%T,%v\n&quot;</span>, y2, y2) 	<span class="comment">//uint16,120</span></span><br><span class="line">fmt.Printf(<span class="string">&quot;%T,%v\n&quot;</span>, z2, z2) 	<span class="comment">//string,abc</span></span><br></pre></td></tr></table></figure></div>
+
+<p>常量除了只读外，不同于变量可以定义运行期分配储存内存<br>常量通常会被编译器在预处理阶段直接展开，作为指令数据使用。</p>
 ]]></content>
       <categories>
         <category>Golang</category>
@@ -151,6 +144,22 @@
 ]]></content>
       <categories>
         <category>测试</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>简述Go语言和博客目的</title>
+    <url>/2023/03/30/%E7%AE%80%E8%BF%B0Go%E8%AF%AD%E8%A8%80%E5%92%8C%E5%8D%9A%E5%AE%A2%E7%9B%AE%E7%9A%84/</url>
+    <content><![CDATA[<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>作为一个小白，对于go语言的理解是浅薄的，对go语言的优势劣势也并无能能力为大家解释清楚。</p>
+<p>所以由于本身是第一次接触go语言，我也只能尽自己的力量从0开始由基础向上迈步。</p>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>个人还是以丰富自身巩固学习为前提，本Go博客栏的编写依照个人的学习和阅读。</p>
+<p>主要书籍是围绕<strong>Go语言程序设计</strong>和雨痕大大的<strong>Go语言学习笔记</strong></p>
+<p>所以举例的代码大多也从书中运行实践后摘抄分享</p>
+<h2 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h2><p>[Go语言中文网](<a class="link"   href="https://studygolang.com/" >首页 - Go语言中文网 - Golang中文社区 (studygolang.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)</p>
+<p>[Golang语言标准库文档](<a class="link"   href="https://studygolang.com/pkgdoc" >Go语言标准库文档中文版 | Go语言中文网 | Golang中文社区 | Golang中国 (studygolang.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)</p>
+<p>雨痕大大Go程序设计<a class="link"   href="https://www.yuque.com/qyuhen/go" >Go 程序设计 (yuque.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+]]></content>
+      <categories>
+        <category>Golang</category>
       </categories>
   </entry>
 </search>

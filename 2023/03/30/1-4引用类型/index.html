@@ -19,13 +19,15 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta property="og:type" content="article">
+        <meta name="description" content="所谓引用类型特指slice、map、channel这三种预定义类型。 拥有更复杂的存储结构，除了分配内存外，它们还须初始化一些了属性， 诸如指针、长度、甚至包括哈希分布】数据队列等。 内置函数new按指定类型长度分配0值内存，返回指针，并不关系你类型内部构造和初始化方式。 而引用类型则必须使用make函数创建，编译器会将转换为目标类型专用的创造函数(或指令)，以确保完成全部内存分配和相关属性初始化">
+<meta property="og:type" content="article">
 <meta property="og:title" content="1.4引用类型">
 <meta property="og:url" content="https://memorize-mint.github.io/2023/03/30/1-4%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="所谓引用类型特指slice、map、channel这三种预定义类型。 拥有更复杂的存储结构，除了分配内存外，它们还须初始化一些了属性， 诸如指针、长度、甚至包括哈希分布】数据队列等。 内置函数new按指定类型长度分配0值内存，返回指针，并不关系你类型内部构造和初始化方式。 而引用类型则必须使用make函数创建，编译器会将转换为目标类型专用的创造函数(或指令)，以确保完成全部内存分配和相关属性初始化">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-03-30T08:49:09.000Z">
-<meta property="article:modified_time" content="2023-03-30T08:49:20.153Z">
+<meta property="article:modified_time" content="2023-03-30T09:03:17.510Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
     
@@ -361,8 +363,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-03-30 16:49:20</span>
-            <span class="mobile">2023-03-30 16:49</span>
+            <span class="desktop">2023-03-30 17:03:17</span>
+            <span class="mobile">2023-03-30 17:03</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -393,7 +395,16 @@
             
 
             <div class="article-content markdown-body">
-                
+                <p>所谓引用类型特指slice、map、channel这三种预定义类型。</p>
+<p>拥有更复杂的存储结构，除了分配内存外，它们还须初始化一些了属性，</p>
+<p>诸如指针、长度、甚至包括哈希分布】数据队列等。</p>
+<p>内置函数<strong>new</strong>按指定类型长度分配0值内存，返回指针，并不关系你类型内部构造和初始化方式。</p>
+<p>而引用类型则必须使用<strong>make</strong>函数创建，编译器会将转换为目标类型专用的创造函数(或指令)，以确保完成全部内存分配和相关属性初始化。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkslice</span><span class="params">()</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">    s := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">    s = <span class="built_in">append</span>(s, <span class="number">100</span>)</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkmap</span><span class="params">()</span></span> <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span> &#123;</span><br><span class="line">    m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)</span><br><span class="line">    m[<span class="string">&quot;a&quot;</span>] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> m</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    p := <span class="built_in">new</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)	<span class="comment">//函数new返回指针</span></span><br><span class="line">    m := *p</span><br><span class="line">    fmt.Println(m)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>虽然new函数为引用类型分配内存，但是是不完整创建。</p>
+<p>仅分配了所需内存用指针包装，并没有分配键值存储内存，也没有初始化散列桶等内部属性，无法正常工作。</p>
+
             </div>
 
             
@@ -405,7 +416,7 @@
         <li><strong>Created at:</strong> 2023-03-30 16:49:09</li>
         
             <li>
-                <strong>Updated at:</strong> 2023-03-30 16:49:20
+                <strong>Updated at:</strong> 2023-03-30 17:03:17
             </li>
         
         <li>
