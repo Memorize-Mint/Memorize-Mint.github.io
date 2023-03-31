@@ -27,7 +27,7 @@
 <meta property="og:description" content="所谓引用类型特指slice、map、channel这三种预定义类型。 拥有更复杂的存储结构，除了分配内存外，它们还须初始化一些了属性， 诸如指针、长度、甚至包括哈希分布】数据队列等。 内置函数new按指定类型长度分配0值内存，返回指针，并不关系你类型内部构造和初始化方式。 而引用类型则必须使用make函数创建，编译器会将转换为目标类型专用的创造函数(或指令)，以确保完成全部内存分配和相关属性初始化">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-03-30T08:49:09.000Z">
-<meta property="article:modified_time" content="2023-03-30T09:03:17.510Z">
+<meta property="article:modified_time" content="2023-03-30T12:20:11.886Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
     
@@ -363,8 +363,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-03-30 17:03:17</span>
-            <span class="mobile">2023-03-30 17:03</span>
+            <span class="desktop">2023-03-30 20:20:11</span>
+            <span class="mobile">2023-03-30 20:20</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -416,7 +416,7 @@
         <li><strong>Created at:</strong> 2023-03-30 16:49:09</li>
         
             <li>
-                <strong>Updated at:</strong> 2023-03-30 17:03:17
+                <strong>Updated at:</strong> 2023-03-30 20:20:11
             </li>
         
         <li>
@@ -484,43 +484,30 @@
 
         
             
-    <div id="gitalk-container"></div>
-    <script data-pjax
-            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
-    <script data-pjax>
+ 
+    <div id="waline"></div>
+    <script type="module"  data-pjax>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
 
-        function loadGitalk() {
-            let __gitalk__pathname = decodeURI(location.pathname);
-            const __gitalk__pathnameLength = __gitalk__pathname.length;
-            const __gitalk__pathnameMaxLength = 50;
-            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
-                __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
-            }
-
-            try {
-                Gitalk && new Gitalk({
-                    clientID: '538e150979b2e339ef2b',
-                    clientSecret: '8dbca2f4857cf4a4d8426db24a2739caea07000c',
-                    repo: 'Blog-gitalk',
-                    owner: 'Memorize-Mint',
-                    admin: ['Memorize-Mint'],
-                    id: __gitalk__pathname,
-                    language: 'en'
-                }).render('gitalk-container');
-
-            } catch (e) {
-                window.Gitalk = null;
-            }
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://memorize-mint.github.io',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
         }
 
         if ('true') {
-            const loadGitalkTimeout = setTimeout(() => {
-                loadGitalk();
-                clearTimeout(loadGitalkTimeout);
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
             }, 1000);
         } else {
-            window.addEventListener('DOMContentLoaded', loadGitalk);
+            window.addEventListener('DOMContentLoaded', loadWaline);
         }
+        
     </script>
 
 

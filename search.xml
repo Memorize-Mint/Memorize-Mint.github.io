@@ -82,23 +82,6 @@
       </categories>
   </entry>
   <entry>
-    <title>1.4引用类型</title>
-    <url>/2023/03/30/1-4%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<p>所谓引用类型特指slice、map、channel这三种预定义类型。</p>
-<p>拥有更复杂的存储结构，除了分配内存外，它们还须初始化一些了属性，</p>
-<p>诸如指针、长度、甚至包括哈希分布】数据队列等。</p>
-<p>内置函数<strong>new</strong>按指定类型长度分配0值内存，返回指针，并不关系你类型内部构造和初始化方式。</p>
-<p>而引用类型则必须使用<strong>make</strong>函数创建，编译器会将转换为目标类型专用的创造函数(或指令)，以确保完成全部内存分配和相关属性初始化。</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkslice</span><span class="params">()</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">    s := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">    s = <span class="built_in">append</span>(s, <span class="number">100</span>)</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkmap</span><span class="params">()</span></span> <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span> &#123;</span><br><span class="line">    m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)</span><br><span class="line">    m[<span class="string">&quot;a&quot;</span>] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> m</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    p := <span class="built_in">new</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)	<span class="comment">//函数new返回指针</span></span><br><span class="line">    m := *p</span><br><span class="line">    fmt.Println(m)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>虽然new函数为引用类型分配内存，但是是不完整创建。</p>
-<p>仅分配了所需内存用指针包装，并没有分配键值存储内存，也没有初始化散列桶等内部属性，无法正常工作。</p>
-]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-  </entry>
-  <entry>
     <title>1.2常量</title>
     <url>/2023/03/30/1-2%E5%B8%B8%E9%87%8F/</url>
     <content><![CDATA[<p> 常量的定义与变量的定义类似:</p>
@@ -142,22 +125,6 @@
       </categories>
   </entry>
   <entry>
-    <title>简述Go语言和博客目的</title>
-    <url>/2023/03/30/%E7%AE%80%E8%BF%B0Go%E8%AF%AD%E8%A8%80%E5%92%8C%E5%8D%9A%E5%AE%A2%E7%9B%AE%E7%9A%84/</url>
-    <content><![CDATA[<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>作为一个小白，对于go语言的理解是浅薄的，对go语言的优势劣势也并无能能力为大家解释清楚。</p>
-<p>所以由于本身是第一次接触go语言，我也只能尽自己的力量从0开始由基础向上迈步。</p>
-<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>个人还是以丰富自身巩固学习为前提，本Go博客栏的编写依照个人的学习和阅读。</p>
-<p>主要书籍是围绕<strong>Go语言程序设计</strong>和雨痕大大的<strong>Go语言学习笔记</strong></p>
-<p>所以举例的代码大多也从书中运行实践后摘抄分享</p>
-<h2 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h2><p>[Go语言中文网](<a class="link"   href="https://studygolang.com/" >首页 - Go语言中文网 - Golang中文社区 (studygolang.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)</p>
-<p>[Golang语言标准库文档](<a class="link"   href="https://studygolang.com/pkgdoc" >Go语言标准库文档中文版 | Go语言中文网 | Golang中文社区 | Golang中国 (studygolang.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)</p>
-<p>雨痕大大Go程序设计<a class="link"   href="https://www.yuque.com/qyuhen/go" >Go 程序设计 (yuque.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2023/03/27/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
@@ -176,6 +143,77 @@
 ]]></content>
       <categories>
         <category>测试</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>1.6自定义类型</title>
+    <url>/2023/03/30/1-6%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p> 使用type关键字定义用户自定义类型，包括基于现有基础类型创建，或是结构体、函数类型等。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> flags <span class="type">byte</span></span><br><span class="line"><span class="keyword">type</span> ( <span class="comment">//组</span></span><br><span class="line">   user <span class="keyword">struct</span> &#123; <span class="comment">//结构体</span></span><br><span class="line">      name <span class="type">string</span></span><br><span class="line">      age  <span class="type">int</span></span><br><span class="line">   &#125;</span><br><span class="line">   event <span class="function"><span class="keyword">func</span><span class="params">(<span class="type">string</span>)</span></span> <span class="type">bool</span> <span class="comment">//函数类型</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+
+<p>即便指定了相同的基础类型，也只能表明他们拥有相同的底层数据类型结构，<br>二者不存在任何关系，属于完全不用的类型。<br>自定义类型不会继承基础类型的其他信息，包括方法，不能视为别名<br>不能隐式转换，不能直接用于比较表达式</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> data <span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> d data = <span class="number">10</span></span><br><span class="line"><span class="keyword">var</span> x <span class="type">int</span> = d   <span class="comment">//错误</span></span><br><span class="line"><span class="built_in">println</span>(x)</span><br><span class="line"><span class="built_in">println</span>(d == x)  <span class="comment">//错误</span></span><br></pre></td></tr></table></figure></div>
+
+<p>最后介绍位掩码</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   <span class="comment">//位掩码表达式      		移动位数</span></span><br><span class="line">   read  flags = <span class="number">1</span> &lt;&lt; <span class="literal">iota</span> <span class="comment">// 1 &lt;&lt; 0 00000001</span></span><br><span class="line">   write                   <span class="comment">// 1 &lt;&lt; 1 00000010</span></span><br><span class="line">   exec                    <span class="comment">// 1 &lt;&lt; 2 00000100</span></span><br><span class="line">   eee                     <span class="comment">// 1 &lt;&lt; 3 00001000</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>1.7未命名类型</title>
+    <url>/2023/03/30/1-7%E6%9C%AA%E5%91%BD%E5%90%8D%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>与明确标识符的 bool int string 等类型相比，<br>数组，切片，字典，通道等类型与具体元素类型或长度等属性有关，<br>所以成为未命名类型 ( unname  2_type)，<br>当然，可用type为其提供具体名称，<br>将其改变为命名变量 (name  2_type)</p>
+<p><strong>具有相同声明的未命名类型被视作统一的类型:</strong></p>
+<ul>
+<li>具有相同基类型指针</li>
+</ul>
+<ul>
+<li>具有相同元素类型和长度的数组（array）</li>
+<li>具有相同元素类型的切片（slice）</li>
+<li>具有相同键值类型的字典（map）</li>
+<li>具有相同数据类型及操作方向的通道（channel）</li>
+<li>具有相同字段序列（字段名、字段类型、标签、以及字段顺序）的结构体（struct）</li>
+<li>具有相同签名（参数和返回值列表，不包括参数名）的函数（func）</li>
+<li>具有相同方法集（方法名，方法签名，不包括顺序）的接口（interface）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>1.4引用类型</title>
+    <url>/2023/03/30/1-4%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p>所谓引用类型特指slice、map、channel这三种预定义类型。</p>
+<p>拥有更复杂的存储结构，除了分配内存外，它们还须初始化一些了属性，</p>
+<p>诸如指针、长度、甚至包括哈希分布】数据队列等。</p>
+<p>内置函数<strong>new</strong>按指定类型长度分配0值内存，返回指针，并不关系你类型内部构造和初始化方式。</p>
+<p>而引用类型则必须使用<strong>make</strong>函数创建，编译器会将转换为目标类型专用的创造函数(或指令)，以确保完成全部内存分配和相关属性初始化。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkslice</span><span class="params">()</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">    s := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">    s = <span class="built_in">append</span>(s, <span class="number">100</span>)</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkmap</span><span class="params">()</span></span> <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span> &#123;</span><br><span class="line">    m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)</span><br><span class="line">    m[<span class="string">&quot;a&quot;</span>] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> m</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    p := <span class="built_in">new</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)	<span class="comment">//函数new返回指针</span></span><br><span class="line">    m := *p</span><br><span class="line">    fmt.Println(m)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>虽然new函数为引用类型分配内存，但是是不完整创建。</p>
+<p>仅分配了所需内存用指针包装，并没有分配键值存储内存，也没有初始化散列桶等内部属性，无法正常工作。</p>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>简述Go语言和博客目的</title>
+    <url>/2023/03/30/%E7%AE%80%E8%BF%B0Go%E8%AF%AD%E8%A8%80%E5%92%8C%E5%8D%9A%E5%AE%A2%E7%9B%AE%E7%9A%84/</url>
+    <content><![CDATA[<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>作为一个小白，对于go语言的理解是浅薄的，对go语言的优势劣势也并无能能力为大家解释清楚。</p>
+<p>所以由于本身是第一次接触go语言，我也只能尽自己的力量从0开始由基础向上迈步。</p>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>个人还是以丰富自身巩固学习为前提，本Go博客栏的编写依照个人的学习和阅读。</p>
+<p> p :&#x3D; (*int)(&amp;x2)println(“p: “, *p)go</p>
+<p>所以举例的代码大多也从书中运行实践后摘抄分享</p>
+<h2 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h2><p>[Go语言中文网](<a class="link"   href="https://studygolang.com/" >首页 - Go语言中文网 - Golang中文社区 (studygolang.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)</p>
+<p>[Golang语言标准库文档](<a class="link"   href="https://studygolang.com/pkgdoc" >Go语言标准库文档中文版 | Go语言中文网 | Golang中文社区 | Golang中国 (studygolang.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)</p>
+<p>雨痕大大Go程序设计<a class="link"   href="https://www.yuque.com/qyuhen/go" >Go 程序设计 (yuque.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+]]></content>
+      <categories>
+        <category>Golang</category>
       </categories>
   </entry>
 </search>
