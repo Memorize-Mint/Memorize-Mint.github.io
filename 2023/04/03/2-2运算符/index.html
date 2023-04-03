@@ -14,19 +14,22 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://memorize-mint.github.io/tags/"/>
+    <link rel="canonical" href="https://memorize-mint.github.io/2023/04/03/2-2运算符/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="https://memorize-mint.github.io/tags/index.html">
+        <meta name="description" content="二元运算符操作类型必须相同，如果声明了一个无显示类型的常量，那么该常量操作数会自动转型。 1234567891011func main() &amp;#123;    const v &#x3D; 20	&#x2F;&#x2F; 无显式类型声明的常量        var a byte &#x3D; 10    b :&#x3D; v + a		&#x2F;&#x2F; v自动转换为 byte&#x2F;uint8类型    fmt.Printf(&quot;%T, %v\n&amp;quo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2-2运算符">
+<meta property="og:url" content="https://memorize-mint.github.io/2023/04/03/2-2%E8%BF%90%E7%AE%97%E7%AC%A6/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="二元运算符操作类型必须相同，如果声明了一个无显示类型的常量，那么该常量操作数会自动转型。 1234567891011func main() &amp;#123;    const v &#x3D; 20	&#x2F;&#x2F; 无显式类型声明的常量        var a byte &#x3D; 10    b :&#x3D; v + a		&#x2F;&#x2F; v自动转换为 byte&#x2F;uint8类型    fmt.Printf(&quot;%T, %v\n&amp;quo">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-04-03T01:13:05.000Z">
-<meta property="article:modified_time" content="2023-04-03T01:13:05.598Z">
+<meta property="article:published_time" content="2023-04-03T14:47:06.000Z">
+<meta property="article:modified_time" content="2023-04-03T15:26:36.515Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
     
     <!--- Icon Part-->
@@ -38,7 +41,7 @@
     
     <title>
         
-            Tags -
+            2-2运算符 -
         
         Memorize_Mint&#39;s Blog
     </title>
@@ -159,7 +162,7 @@
                         
                             <li class="navbar-item">
                                 <!-- Menu -->
-                                <a class="active" 
+                                <a class="" 
                                     href="/tags/"  >
                                     
                                         
@@ -283,7 +286,7 @@
             
                 
                     <li class="drawer-navbar-item flex-center">
-                        <a class="active" 
+                        <a class="" 
                         href="/tags/"  >
                              
                                 
@@ -362,25 +365,245 @@
             <div class="main-content">
 
                 
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">2-2运算符</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar_main.jpg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Memorize_Mint</span>
+                            
+                                <span class="author-label"></span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-04-03 22:47:06</span>
+        <span class="mobile">2023-04-03 22:47</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-04-03 23:26:36</span>
+            <span class="mobile">2023-04-03 23:26</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Golang/">Golang</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Golang/">Golang</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>761 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>3 Mins</span>
+        </span>
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h2 id="二元运算符"><a href="#二元运算符" class="headerlink" title="二元运算符"></a>二元运算符</h2><p>操作类型必须相同，如果声明了一个无显示类型的常量，那么该常量操作数会自动转型。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">const</span> v = <span class="number">20</span>	<span class="comment">// 无显式类型声明的常量</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> a <span class="type">byte</span> = <span class="number">10</span></span><br><span class="line">    b := v + a		<span class="comment">// v自动转换为 byte/uint8类型</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;%T, %v\n&quot;</span>, b, b)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> c <span class="type">float32</span> = <span class="number">1.2</span></span><br><span class="line">    d := c + v		<span class="comment">// v自动转换为 float32类型</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;%T, %v\n&quot;</span>, d, d)		<span class="comment">//%v：会以默认形式打印值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>输出:</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">uint8</span>, <span class="number">30</span></span><br><span class="line"><span class="type">float32</span>, <span class="number">21.2</span></span><br></pre></td></tr></table></figure></div>
+
+<p>右移位操作数必须是无符号整数，或可以转换的无显示类型常量</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    v1 := <span class="number">23</span>      <span class="comment">//有符号int类型变量</span></span><br><span class="line">	x4 := <span class="number">1</span> &lt;&lt; v1 <span class="comment">//无效操作</span></span><br><span class="line">	<span class="built_in">println</span>(x4)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>如果是非常量位移表达式，那么会优先将无显示类型的常量左操作数转型。 </p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    a3 := <span class="number">1.0</span> &lt;&lt; <span class="number">3</span>                <span class="comment">//常量表达式（包括常量展开）</span></span><br><span class="line">	fmt.Printf(<span class="string">&quot;%T,%v\n&quot;</span>, a3, a3) <span class="comment">//int,8</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2><div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">		read   <span class="type">byte</span> = <span class="number">1</span> &lt;&lt; <span class="literal">iota</span> <span class="comment">//00000001 = 1</span></span><br><span class="line">		write                   <span class="comment">//00000010 = 2</span></span><br><span class="line">		exec                    <span class="comment">//00000100 = 4</span></span><br><span class="line">		freeze                  <span class="comment">//00001000 = 8</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    a := read | write | freeze <span class="comment">//1011</span></span><br><span class="line">	b := read | freeze | exec <span class="comment">//1101</span></span><br><span class="line">	c := a &amp;^ b</span><br><span class="line">    fmt.Printf(<span class="string">&quot;%04b &amp;^ %04b = %04b\n&quot;</span>, a, b, c)</span><br><span class="line">    <span class="comment">//1011 &amp;^ 1101 = 0010</span></span><br><span class="line">	<span class="comment">// &amp;^ b 的意思就是 将b中为1的位 对应于a的位比较后，</span></span><br><span class="line">    <span class="comment">// 如果a,b同位都为1，则清0，</span></span><br><span class="line">	<span class="comment">//若b中位0的位 对应 a中1位，则a位不变，其他位不变。</span></span><br><span class="line">	<span class="comment">//功能同a&amp;(^b)相同</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="自增"><a href="#自增" class="headerlink" title="自增"></a>自增</h2><p>自增自减不再是运算符，只能作为独立语句，<strong>不能用于表达式</strong></p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">m := <span class="number">1</span>	<span class="comment">// ++m   //语法错误  不能前置</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	if (m++) &gt; 1 &#123;  语法错误 不能作为表达式使用</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">p := &amp;m</span><br><span class="line">*p++ 		<span class="comment">//相当于 （*p）++</span></span><br><span class="line"><span class="built_in">println</span>(m)	<span class="comment">// 2</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p>不能将内存地址与指针混为一谈<br>内存地址是内存中每个字节单元的唯一编号，<br>而指针则是一个实体。指针会分配内存空间，<br>相当于一个专门用来保存地址的整体变量，并非所有对象都可以进行地址操作<br><strong>指针运算符为左值时，我们可以更新目标对象状态<br>为右值时则是为了获取目标状态</strong></p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	x := <span class="number">10</span></span><br><span class="line">	<span class="keyword">var</span> p *<span class="type">int</span> = &amp;x 	<span class="comment">//获取地址，保存到指针变量</span></span><br><span class="line">    *p += <span class="number">20</span>         <span class="comment">//用指针间接引用，并更新对象</span></span><br><span class="line">	<span class="built_in">println</span>(p, *p)  <span class="comment">//输出指针所存储的地址，以及目标对象</span></span><br><span class="line">    <span class="comment">// p = 30</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>如果两个指针指向同一地址，或都为nil，那他们相等<br>指针没有专门指向成员的“-&gt;”运算符，<strong>统一使用”.”选择表达式</strong></p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    f := <span class="keyword">struct</span> &#123;</span><br><span class="line">		x <span class="type">int</span></span><br><span class="line">	&#125;&#123;&#125;</span><br><span class="line">	f.x = <span class="number">10</span></span><br><span class="line">	a := &amp;f</span><br><span class="line">	a.x += <span class="number">100</span></span><br><span class="line">	<span class="built_in">println</span>(a.x)	<span class="comment">//110</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>零长度对象的地址是否相等和具体的实现版本有关，不过肯定不等于nil</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ma, mi <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line">		<span class="comment">//即使长度为0，依旧合法存在，拥有合法地址，与nil语义不同</span></span><br><span class="line"><span class="built_in">println</span>(&amp;ma, &amp;mi)</span><br><span class="line"><span class="built_in">println</span>(&amp;ma == &amp;mi, &amp;ma == <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure></div>
+
+<p>输出:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0xc000129eb0 0xc000129eb0</span><br><span class="line">false false		//有些版本可能是 true false</span><br></pre></td></tr></table></figure></div>
+
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> 2-2运算符</li>
+        <li><strong>Author:</strong> Memorize_Mint</li>
+        <li><strong>Created at:</strong> 2023-04-03 22:47:06</li>
+        
+            <li>
+                <strong>Updated at:</strong> 2023-04-03 23:26:36
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://memorize-mint.github.io/2023/04/03/2-2运算符/
+        </li>
+        <li>
+            <strong>License:</strong> This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
                     
-    <div class="fade-in-down-animation">
-        <div class="tagcloud-container">
-          
-            <div class="tagcloud-header">
-                <h1 style="margin: 15px 5px; margin-bottom: 30px;">Tags</h1>
-            </div>
-            <div class="tagcloud-content">
-              <ul class="tag-list" data-show-value="true">
-                
-                  <li><a data-weight="10" href="/tags/Golang/"><i class="fa-solid fa-hashtag"></i>Golang</a></li>
-                
-                  <li><a data-weight="1" href="/tags/测试/"><i class="fa-solid fa-hashtag"></i>测试</a></li>
-                
-              </ul>
-            </div>
+                        <li class="tag-item">
+                            <a href="/tags/Golang/">#Golang</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/04/03/2-1%E4%BF%9D%E7%95%99%E5%AD%97/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">2-1保留字</span>
+                                    <span class="post-nav-item">Next posts</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;Comments
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-pjax>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'waline-test-olive.vercel.app',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+                </div>
             
         </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">2-2运算符</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">二元运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">位运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%A2%9E"><span class="nav-text">自增</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88"><span class="nav-text">指针</span></a></li></ol>
+
     </div>
+</div>
+            </div>
+        
+    </div>
+</div>
 
 
                 
@@ -457,6 +680,27 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-side-tools-container">
@@ -600,6 +844,16 @@
 
 
 <div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
     
 </div>
 

@@ -80,6 +80,25 @@
       </tags>
   </entry>
   <entry>
+    <title>1.5类型转换</title>
+    <url>/2023/03/30/1-5%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
+    <content><![CDATA[<p> Go强制要求使用显式类型转换，而且不支持操作符重载</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">a1 := <span class="number">10</span></span><br><span class="line">b1 := <span class="type">byte</span>(a1)</span><br><span class="line">c1 := a1 + <span class="type">int</span>(b1)	<span class="comment">//混合类型表达式必须保持一致</span></span><br></pre></td></tr></table></figure></div>
+
+<p>不能将非bool类型结果当作true&#x2F;false</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">x2 := <span class="number">100</span></span><br><span class="line"><span class="keyword">var</span> c2 <span class="type">bool</span> = x2	<span class="comment">//错误</span></span><br><span class="line"><span class="keyword">if</span> x2 &#123;				<span class="comment">//错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>如果转换目标是指针类型、单项通道或没有返回值的函数类型，<br>那么必须使用括号，以避免造成语法分解的错误</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">p := (*<span class="type">int</span>)(&amp;x2)</span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;p: &quot;</span>, *p)</span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>1.3枚举</title>
     <url>/2023/03/30/1-3%E6%9E%9A%E4%B8%BE/</url>
     <content><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>由于以后的案例可能会经常运用到枚举，</p>
@@ -118,64 +137,6 @@
       </tags>
   </entry>
   <entry>
-    <title>1.4引用类型</title>
-    <url>/2023/03/30/1-4%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<p>所谓引用类型特指slice、map、channel这三种预定义类型。</p>
-<p>拥有更复杂的存储结构，除了分配内存外，它们还须初始化一些了属性，</p>
-<p>诸如指针、长度、甚至包括哈希分布】数据队列等。</p>
-<p>内置函数<strong>new</strong>按指定类型长度分配0值内存，返回指针，并不关系你类型内部构造和初始化方式。</p>
-<p>而引用类型则必须使用<strong>make</strong>函数创建，编译器会将转换为目标类型专用的创造函数(或指令)，以确保完成全部内存分配和相关属性初始化。</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkslice</span><span class="params">()</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">    s := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">    s = <span class="built_in">append</span>(s, <span class="number">100</span>)</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkmap</span><span class="params">()</span></span> <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span> &#123;</span><br><span class="line">    m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)</span><br><span class="line">    m[<span class="string">&quot;a&quot;</span>] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> m</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    p := <span class="built_in">new</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)	<span class="comment">//函数new返回指针</span></span><br><span class="line">    m := *p</span><br><span class="line">    fmt.Println(m)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>虽然new函数为引用类型分配内存，但是是不完整创建。</p>
-<p>仅分配了所需内存用指针包装，并没有分配键值存储内存，也没有初始化散列桶等内部属性，无法正常工作。</p>
-]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-      <tags>
-        <tag>Golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>1.5类型转换</title>
-    <url>/2023/03/30/1-5%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
-    <content><![CDATA[<p> Go强制要求使用显式类型转换，而且不支持操作符重载</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">a1 := <span class="number">10</span></span><br><span class="line">b1 := <span class="type">byte</span>(a1)</span><br><span class="line">c1 := a1 + <span class="type">int</span>(b1)	<span class="comment">//混合类型表达式必须保持一致</span></span><br></pre></td></tr></table></figure></div>
-
-<p>不能将非bool类型结果当作true&#x2F;false</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">x2 := <span class="number">100</span></span><br><span class="line"><span class="keyword">var</span> c2 <span class="type">bool</span> = x2	<span class="comment">//错误</span></span><br><span class="line"><span class="keyword">if</span> x2 &#123;				<span class="comment">//错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>如果转换目标是指针类型、单项通道或没有返回值的函数类型，<br>那么必须使用括号，以避免造成语法分解的错误</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">p := (*<span class="type">int</span>)(&amp;x2)</span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;p: &quot;</span>, *p)</span><br></pre></td></tr></table></figure></div>
-]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-      <tags>
-        <tag>Golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>1.6自定义类型</title>
-    <url>/2023/03/30/1-6%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<p> 使用type关键字定义用户自定义类型，包括基于现有基础类型创建，或是结构体、函数类型等。</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> flags <span class="type">byte</span></span><br><span class="line"><span class="keyword">type</span> ( <span class="comment">//组</span></span><br><span class="line">   user <span class="keyword">struct</span> &#123; <span class="comment">//结构体</span></span><br><span class="line">      name <span class="type">string</span></span><br><span class="line">      age  <span class="type">int</span></span><br><span class="line">   &#125;</span><br><span class="line">   event <span class="function"><span class="keyword">func</span><span class="params">(<span class="type">string</span>)</span></span> <span class="type">bool</span> <span class="comment">//函数类型</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
-
-<p>即便指定了相同的基础类型，也只能表明他们拥有相同的底层数据类型结构，<br>二者不存在任何关系，属于完全不用的类型。<br>自定义类型不会继承基础类型的其他信息，包括方法，不能视为别名<br>不能隐式转换，不能直接用于比较表达式</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> data <span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> d data = <span class="number">10</span></span><br><span class="line"><span class="keyword">var</span> x <span class="type">int</span> = d   <span class="comment">//错误</span></span><br><span class="line"><span class="built_in">println</span>(x)</span><br><span class="line"><span class="built_in">println</span>(d == x)  <span class="comment">//错误</span></span><br></pre></td></tr></table></figure></div>
-
-<p>最后介绍位掩码</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   <span class="comment">//位掩码表达式      		移动位数</span></span><br><span class="line">   read  flags = <span class="number">1</span> &lt;&lt; <span class="literal">iota</span> <span class="comment">// 1 &lt;&lt; 0 00000001</span></span><br><span class="line">   write                   <span class="comment">// 1 &lt;&lt; 1 00000010</span></span><br><span class="line">   exec                    <span class="comment">// 1 &lt;&lt; 2 00000100</span></span><br><span class="line">   eee                     <span class="comment">// 1 &lt;&lt; 3 00001000</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
-]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-      <tags>
-        <tag>Golang</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>1.7未命名类型</title>
     <url>/2023/03/30/1-7%E6%9C%AA%E5%91%BD%E5%90%8D%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>与明确标识符的 bool int string 等类型相比，<br>数组，切片，字典，通道等类型与具体元素类型或长度等属性有关，<br>所以成为未命名类型 ( unname  2_type)，<br>当然，可用type为其提供具体名称，<br>将其改变为命名变量 (name  2_type)</p>
@@ -192,6 +153,87 @@
 <li>具有相同签名（参数和返回值列表，不包括参数名）的函数（func）</li>
 <li>具有相同方法集（方法名，方法签名，不包括顺序）的接口（interface）</li>
 </ul>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-1保留字</title>
+    <url>/2023/04/03/2-1%E4%BF%9D%E7%95%99%E5%AD%97/</url>
+    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Go语言保留字仅25个，相比其他语言简洁不少。</p>
+<p>包管理（2个）：</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span>	 <span class="keyword">package</span> </span><br></pre></td></tr></table></figure></div>
+
+<p>程序实体声明与定义（8个）： </p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">chan</span>	<span class="keyword">const</span>	<span class="function"><span class="keyword">func</span>	<span class="title">interface</span>	<span class="title">map</span>	 <span class="title">struct</span>	 <span class="title">type</span>  <span class="title">var</span></span> </span><br></pre></td></tr></table></figure></div>
+
+<p>程序流程控制（15个）： break	case	continue	default	defer	else	fallthrough	 for		go		goto		if		range	return	select		switch</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">break</span>	<span class="keyword">case</span>	<span class="keyword">continue</span>	<span class="keyword">default</span>		<span class="keyword">defer</span>	<span class="keyword">else</span>	<span class="keyword">fallthrough</span>	 <span class="keyword">for</span>	<span class="keyword">go</span>		<span class="keyword">goto</span>		<span class="keyword">if</span>		<span class="keyword">range</span>	<span class="keyword">return</span>	<span class="keyword">select</span>		<span class="keyword">switch</span></span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-2运算符</title>
+    <url>/2023/04/03/2-2%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
+    <content><![CDATA[<h2 id="二元运算符"><a href="#二元运算符" class="headerlink" title="二元运算符"></a>二元运算符</h2><p>操作类型必须相同，如果声明了一个无显示类型的常量，那么该常量操作数会自动转型。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">const</span> v = <span class="number">20</span>	<span class="comment">// 无显式类型声明的常量</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> a <span class="type">byte</span> = <span class="number">10</span></span><br><span class="line">    b := v + a		<span class="comment">// v自动转换为 byte/uint8类型</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;%T, %v\n&quot;</span>, b, b)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> c <span class="type">float32</span> = <span class="number">1.2</span></span><br><span class="line">    d := c + v		<span class="comment">// v自动转换为 float32类型</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;%T, %v\n&quot;</span>, d, d)		<span class="comment">//%v：会以默认形式打印值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>输出:</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="type">uint8</span>, <span class="number">30</span></span><br><span class="line"><span class="type">float32</span>, <span class="number">21.2</span></span><br></pre></td></tr></table></figure></div>
+
+<p>右移位操作数必须是无符号整数，或可以转换的无显示类型常量</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    v1 := <span class="number">23</span>      <span class="comment">//有符号int类型变量</span></span><br><span class="line">	x4 := <span class="number">1</span> &lt;&lt; v1 <span class="comment">//无效操作</span></span><br><span class="line">	<span class="built_in">println</span>(x4)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>如果是非常量位移表达式，那么会优先将无显示类型的常量左操作数转型。 </p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    a3 := <span class="number">1.0</span> &lt;&lt; <span class="number">3</span>                <span class="comment">//常量表达式（包括常量展开）</span></span><br><span class="line">	fmt.Printf(<span class="string">&quot;%T,%v\n&quot;</span>, a3, a3) <span class="comment">//int,8</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2><div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">		read   <span class="type">byte</span> = <span class="number">1</span> &lt;&lt; <span class="literal">iota</span> <span class="comment">//00000001 = 1</span></span><br><span class="line">		write                   <span class="comment">//00000010 = 2</span></span><br><span class="line">		exec                    <span class="comment">//00000100 = 4</span></span><br><span class="line">		freeze                  <span class="comment">//00001000 = 8</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    a := read | write | freeze <span class="comment">//1011</span></span><br><span class="line">	b := read | freeze | exec <span class="comment">//1101</span></span><br><span class="line">	c := a &amp;^ b</span><br><span class="line">    fmt.Printf(<span class="string">&quot;%04b &amp;^ %04b = %04b\n&quot;</span>, a, b, c)</span><br><span class="line">    <span class="comment">//1011 &amp;^ 1101 = 0010</span></span><br><span class="line">	<span class="comment">// &amp;^ b 的意思就是 将b中为1的位 对应于a的位比较后，</span></span><br><span class="line">    <span class="comment">// 如果a,b同位都为1，则清0，</span></span><br><span class="line">	<span class="comment">//若b中位0的位 对应 a中1位，则a位不变，其他位不变。</span></span><br><span class="line">	<span class="comment">//功能同a&amp;(^b)相同</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="自增"><a href="#自增" class="headerlink" title="自增"></a>自增</h2><p>自增自减不再是运算符，只能作为独立语句，<strong>不能用于表达式</strong></p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">m := <span class="number">1</span>	<span class="comment">// ++m   //语法错误  不能前置</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	if (m++) &gt; 1 &#123;  语法错误 不能作为表达式使用</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">p := &amp;m</span><br><span class="line">*p++ 		<span class="comment">//相当于 （*p）++</span></span><br><span class="line"><span class="built_in">println</span>(m)	<span class="comment">// 2</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p>不能将内存地址与指针混为一谈<br>内存地址是内存中每个字节单元的唯一编号，<br>而指针则是一个实体。指针会分配内存空间，<br>相当于一个专门用来保存地址的整体变量，并非所有对象都可以进行地址操作<br><strong>指针运算符为左值时，我们可以更新目标对象状态<br>为右值时则是为了获取目标状态</strong></p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	x := <span class="number">10</span></span><br><span class="line">	<span class="keyword">var</span> p *<span class="type">int</span> = &amp;x 	<span class="comment">//获取地址，保存到指针变量</span></span><br><span class="line">    *p += <span class="number">20</span>         <span class="comment">//用指针间接引用，并更新对象</span></span><br><span class="line">	<span class="built_in">println</span>(p, *p)  <span class="comment">//输出指针所存储的地址，以及目标对象</span></span><br><span class="line">    <span class="comment">// p = 30</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>如果两个指针指向同一地址，或都为nil，那他们相等<br>指针没有专门指向成员的“-&gt;”运算符，<strong>统一使用”.”选择表达式</strong></p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    f := <span class="keyword">struct</span> &#123;</span><br><span class="line">		x <span class="type">int</span></span><br><span class="line">	&#125;&#123;&#125;</span><br><span class="line">	f.x = <span class="number">10</span></span><br><span class="line">	a := &amp;f</span><br><span class="line">	a.x += <span class="number">100</span></span><br><span class="line">	<span class="built_in">println</span>(a.x)	<span class="comment">//110</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>零长度对象的地址是否相等和具体的实现版本有关，不过肯定不等于nil</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> ma, mi <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line">		<span class="comment">//即使长度为0，依旧合法存在，拥有合法地址，与nil语义不同</span></span><br><span class="line"><span class="built_in">println</span>(&amp;ma, &amp;mi)</span><br><span class="line"><span class="built_in">println</span>(&amp;ma == &amp;mi, &amp;ma == <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure></div>
+
+<p>输出:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">0xc000129eb0 0xc000129eb0</span><br><span class="line">false false		//有些版本可能是 true false</span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1.4引用类型</title>
+    <url>/2023/03/30/1-4%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p>所谓引用类型特指slice、map、channel这三种预定义类型。</p>
+<p>拥有更复杂的存储结构，除了分配内存外，它们还须初始化一些了属性，</p>
+<p>诸如指针、长度、甚至包括哈希分布】数据队列等。</p>
+<p>内置函数<strong>new</strong>按指定类型长度分配0值内存，返回指针，并不关系你类型内部构造和初始化方式。</p>
+<p>而引用类型则必须使用<strong>make</strong>函数创建，编译器会将转换为目标类型专用的创造函数(或指令)，以确保完成全部内存分配和相关属性初始化。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkslice</span><span class="params">()</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">    s := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">    s = <span class="built_in">append</span>(s, <span class="number">100</span>)</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkmap</span><span class="params">()</span></span> <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span> &#123;</span><br><span class="line">    m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)</span><br><span class="line">    m[<span class="string">&quot;a&quot;</span>] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> m</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    p := <span class="built_in">new</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)	<span class="comment">//函数new返回指针</span></span><br><span class="line">    m := *p</span><br><span class="line">    fmt.Println(m)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>虽然new函数为引用类型分配内存，但是是不完整创建。</p>
+<p>仅分配了所需内存用指针包装，并没有分配键值存储内存，也没有初始化散列桶等内部属性，无法正常工作。</p>
 ]]></content>
       <categories>
         <category>Golang</category>
@@ -236,6 +278,25 @@
 <h2 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h2><p>[Go语言中文网](<a class="link"   href="https://studygolang.com/" >首页 - Go语言中文网 - Golang中文社区 (studygolang.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)</p>
 <p>[Golang语言标准库文档](<a class="link"   href="https://studygolang.com/pkgdoc" >Go语言标准库文档中文版 | Go语言中文网 | Golang中文社区 | Golang中国 (studygolang.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)</p>
 <p>雨痕大大Go程序设计<a class="link"   href="https://www.yuque.com/qyuhen/go" >Go 程序设计 (yuque.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1.6自定义类型</title>
+    <url>/2023/03/30/1-6%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p> 使用type关键字定义用户自定义类型，包括基于现有基础类型创建，或是结构体、函数类型等。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> flags <span class="type">byte</span></span><br><span class="line"><span class="keyword">type</span> ( <span class="comment">//组</span></span><br><span class="line">   user <span class="keyword">struct</span> &#123; <span class="comment">//结构体</span></span><br><span class="line">      name <span class="type">string</span></span><br><span class="line">      age  <span class="type">int</span></span><br><span class="line">   &#125;</span><br><span class="line">   event <span class="function"><span class="keyword">func</span><span class="params">(<span class="type">string</span>)</span></span> <span class="type">bool</span> <span class="comment">//函数类型</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+
+<p>即便指定了相同的基础类型，也只能表明他们拥有相同的底层数据类型结构，<br>二者不存在任何关系，属于完全不用的类型。<br>自定义类型不会继承基础类型的其他信息，包括方法，不能视为别名<br>不能隐式转换，不能直接用于比较表达式</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> data <span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> d data = <span class="number">10</span></span><br><span class="line"><span class="keyword">var</span> x <span class="type">int</span> = d   <span class="comment">//错误</span></span><br><span class="line"><span class="built_in">println</span>(x)</span><br><span class="line"><span class="built_in">println</span>(d == x)  <span class="comment">//错误</span></span><br></pre></td></tr></table></figure></div>
+
+<p>最后介绍位掩码</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   <span class="comment">//位掩码表达式      		移动位数</span></span><br><span class="line">   read  flags = <span class="number">1</span> &lt;&lt; <span class="literal">iota</span> <span class="comment">// 1 &lt;&lt; 0 00000001</span></span><br><span class="line">   write                   <span class="comment">// 1 &lt;&lt; 1 00000010</span></span><br><span class="line">   exec                    <span class="comment">// 1 &lt;&lt; 2 00000100</span></span><br><span class="line">   eee                     <span class="comment">// 1 &lt;&lt; 3 00001000</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
 ]]></content>
       <categories>
         <category>Golang</category>
