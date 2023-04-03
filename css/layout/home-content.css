@@ -229,11 +229,11 @@
 }
 .home-content-container {
   background: var(--background-color);
-  margin-right: 38px;
+  margin-left: 38px;
 }
 @media (max-width: 780px) {
   .home-content-container {
-    margin-right: 19px;
+    margin-left: 19px;
   }
 }
 .home-content-container .seo-reader-text {

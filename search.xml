@@ -1,52 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>1.1变量</title>
-    <url>/2023/03/30/1-1%E5%8F%98%E9%87%8F/</url>
-    <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>Go使用关键字var定义变量，与传统编程语言C和Java定义变量不同，Go则将类型放置变量名之后。</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x <span class="type">int</span>			<span class="comment">//自动初始化为0</span></span><br><span class="line"><span class="keyword">var</span> y = flase 		<span class="comment">//自动推断为bool类型</span></span><br></pre></td></tr></table></figure></div>
-
-<p>也可一次定义多个变量，包括不同初始值定义不同类型</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x, y <span class="type">int</span>		<span class="comment">//相同类型的多个变量</span></span><br><span class="line"><span class="keyword">var</span> a, s = <span class="number">100</span>, <span class="string">&quot;abc&quot;</span>		<span class="comment">//不同类型的初始化值</span></span><br></pre></td></tr></table></figure></div>
-
-<p>不过依照简便和可读性，也可以按组的方式多行变量定义</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123;</span><br><span class="line">    x, y <span class="type">int</span></span><br><span class="line">    a,s = <span class="number">100</span>, <span class="string">&quot;abc&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="简短模式"><a href="#简短模式" class="headerlink" title="简短模式"></a>简短模式</h2><p>其实除了使用var关键字还可以使用一种更简单的变量定义和初始化语法的方法。如下：</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    x := <span class="number">100</span></span><br><span class="line">    a, s := <span class="number">1</span>, <span class="string">&quot;abc&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>不过需要注意的是，简短模式虽然看似定义简单，但是也有一些<strong>限制</strong>：</p>
-<ul>
-<li>定义变量，同时显式初始化</li>
-<li>不能提供数据类型</li>
-<li>只能用在函数内部</li>
-</ul>
-<p>要记住，简短模式是快速定义一个新变量的方法，<strong>而不是修改变量值的方法</strong>。</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> k = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="built_in">println</span>(&amp;k, k)</span><br><span class="line">    k := <span class="string">&quot;200&quot;</span>		<span class="comment">//重新定义和初始化同名局部变量</span></span><br><span class="line">    <span class="built_in">println</span>(&amp;k, k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>输出</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">0x4c5248</span> <span class="number">100</span>		<span class="comment">//对比内存地址，看出是两个不同的变量</span></span><br><span class="line"><span class="number">0xc000069f68</span> <span class="number">200</span></span><br></pre></td></tr></table></figure></div>
-
-<p>但是，简短模式并不总是重新定义变量的，也可能是部分退化的赋值操作</p>
-<p>前提条件是：最少有一个变量被定义，并且必须在同一个作用域</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	k := <span class="number">32</span> <span class="comment">//定义变量简短模式</span></span><br><span class="line">	<span class="built_in">println</span>(&amp;k, k)</span><br><span class="line"></span><br><span class="line">	k, j := <span class="number">200</span>, <span class="string">&quot;abc&quot;</span></span><br><span class="line">    <span class="comment">//k := 200	报错: no new variable on left side of :=</span></span><br><span class="line">	<span class="built_in">println</span>(&amp;k, k)</span><br><span class="line">	<span class="built_in">println</span>(j)</span><br><span class="line">    </span><br><span class="line">    &#123; <span class="comment">//不同作用域，全部视作是新变量定义</span></span><br><span class="line">		k, j := <span class="number">300</span>, <span class="number">300</span></span><br><span class="line">		<span class="built_in">println</span>(&amp;k, k, j)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-
-<p>输出</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">0xc000069f68</span> <span class="number">32</span></span><br><span class="line"><span class="number">0xc000069f68</span> <span class="number">200</span></span><br><span class="line">abc</span><br><span class="line"><span class="number">0xc000069f60</span> <span class="number">300</span> <span class="number">300</span></span><br></pre></td></tr></table></figure></div>
-
-<h2 id="多变量赋值"><a href="#多变量赋值" class="headerlink" title="多变量赋值"></a>多变量赋值</h2><p>在进行错变量赋值时，首先计算出所有右值，然后再依次完成赋值操作。</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//多变量赋值</span></span><br><span class="line">	a, b := <span class="number">1</span>, <span class="number">2</span></span><br><span class="line">	a, b = b+<span class="number">3</span>, a+<span class="number">2</span></span><br><span class="line">	<span class="built_in">println</span>(a, b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>输出</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">5</span> <span class="number">3</span></span><br></pre></td></tr></table></figure></div>
-
-<h2 id="未使用错误"><a href="#未使用错误" class="headerlink" title="未使用错误"></a>未使用错误</h2><p>顾名思义，编译器将创建的并且未使用的<strong>局部变量</strong>当作错误，但是全局变量不做规范。</p>
-]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-  </entry>
-  <entry>
     <title>1.3枚举</title>
     <url>/2023/03/30/1-3%E6%9E%9A%E4%B8%BE/</url>
     <content><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>由于以后的案例可能会经常运用到枚举，</p>
@@ -109,6 +63,22 @@
       </categories>
   </entry>
   <entry>
+    <title>1.5类型转换</title>
+    <url>/2023/03/30/1-5%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
+    <content><![CDATA[<p> Go强制要求使用显式类型转换，而且不支持操作符重载</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">a1 := <span class="number">10</span></span><br><span class="line">b1 := <span class="type">byte</span>(a1)</span><br><span class="line">c1 := a1 + <span class="type">int</span>(b1)	<span class="comment">//混合类型表达式必须保持一致</span></span><br></pre></td></tr></table></figure></div>
+
+<p>不能将非bool类型结果当作true&#x2F;false</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">x2 := <span class="number">100</span></span><br><span class="line"><span class="keyword">var</span> c2 <span class="type">bool</span> = x2	<span class="comment">//错误</span></span><br><span class="line"><span class="keyword">if</span> x2 &#123;				<span class="comment">//错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>如果转换目标是指针类型、单项通道或没有返回值的函数类型，<br>那么必须使用括号，以避免造成语法分解的错误</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">p := (*<span class="type">int</span>)(&amp;x2)</span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;p: &quot;</span>, *p)</span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+  </entry>
+  <entry>
     <title>1.4引用类型</title>
     <url>/2023/03/30/1-4%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<p>所谓引用类型特指slice、map、channel这三种预定义类型。</p>
@@ -142,22 +112,6 @@
       </categories>
   </entry>
   <entry>
-    <title>1.5类型转换</title>
-    <url>/2023/03/30/1-5%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
-    <content><![CDATA[<p> Go强制要求使用显式类型转换，而且不支持操作符重载</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">a1 := <span class="number">10</span></span><br><span class="line">b1 := <span class="type">byte</span>(a1)</span><br><span class="line">c1 := a1 + <span class="type">int</span>(b1)	<span class="comment">//混合类型表达式必须保持一致</span></span><br></pre></td></tr></table></figure></div>
-
-<p>不能将非bool类型结果当作true&#x2F;false</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">x2 := <span class="number">100</span></span><br><span class="line"><span class="keyword">var</span> c2 <span class="type">bool</span> = x2	<span class="comment">//错误</span></span><br><span class="line"><span class="keyword">if</span> x2 &#123;				<span class="comment">//错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>如果转换目标是指针类型、单项通道或没有返回值的函数类型，<br>那么必须使用括号，以避免造成语法分解的错误</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">p := (*<span class="type">int</span>)(&amp;x2)</span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;p: &quot;</span>, *p)</span><br></pre></td></tr></table></figure></div>
-]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-  </entry>
-  <entry>
     <title>1.7未命名类型</title>
     <url>/2023/03/30/1-7%E6%9C%AA%E5%91%BD%E5%90%8D%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>与明确标识符的 bool int string 等类型相比，<br>数组，切片，字典，通道等类型与具体元素类型或长度等属性有关，<br>所以成为未命名类型 ( unname  2_type)，<br>当然，可用type为其提供具体名称，<br>将其改变为命名变量 (name  2_type)</p>
@@ -174,22 +128,6 @@
 <li>具有相同签名（参数和返回值列表，不包括参数名）的函数（func）</li>
 <li>具有相同方法集（方法名，方法签名，不包括顺序）的接口（interface）</li>
 </ul>
-]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>简述Go语言和博客目的</title>
-    <url>/2023/03/30/%E7%AE%80%E8%BF%B0Go%E8%AF%AD%E8%A8%80%E5%92%8C%E5%8D%9A%E5%AE%A2%E7%9B%AE%E7%9A%84/</url>
-    <content><![CDATA[<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>作为一个小白，对于go语言的理解是浅薄的，对go语言的优势劣势也并无能能力为大家解释清楚。</p>
-<p>所以由于本身是第一次接触go语言，我也只能尽自己的力量从0开始由基础向上迈步。</p>
-<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>个人还是以丰富自身巩固学习为前提，本Go博客栏的编写依照个人的学习和阅读。</p>
-<p> p :&#x3D; (*int)(&amp;x2)println(“p: “, *p)go</p>
-<p>所以举例的代码大多也从书中运行实践后摘抄分享</p>
-<h2 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h2><p>[Go语言中文网](<a class="link"   href="https://studygolang.com/" >首页 - Go语言中文网 - Golang中文社区 (studygolang.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)</p>
-<p>[Golang语言标准库文档](<a class="link"   href="https://studygolang.com/pkgdoc" >Go语言标准库文档中文版 | Go语言中文网 | Golang中文社区 | Golang中国 (studygolang.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)</p>
-<p>雨痕大大Go程序设计<a class="link"   href="https://www.yuque.com/qyuhen/go" >Go 程序设计 (yuque.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 ]]></content>
       <categories>
         <category>Golang</category>
@@ -219,5 +157,67 @@
       <tags>
         <tag>测试</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>简述Go语言和博客目的</title>
+    <url>/2023/03/30/%E7%AE%80%E8%BF%B0Go%E8%AF%AD%E8%A8%80%E5%92%8C%E5%8D%9A%E5%AE%A2%E7%9B%AE%E7%9A%84/</url>
+    <content><![CDATA[<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>作为一个小白，对于go语言的理解是浅薄的，对go语言的优势劣势也并无能能力为大家解释清楚。</p>
+<p>所以由于本身是第一次接触go语言，我也只能尽自己的力量从0开始由基础向上迈步。</p>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>个人还是以丰富自身巩固学习为前提，本Go博客栏的编写依照个人的学习和阅读。</p>
+<p> p :&#x3D; (*int)(&amp;x2)println(“p: “, *p)go</p>
+<p>所以举例的代码大多也从书中运行实践后摘抄分享</p>
+<h2 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h2><p>[Go语言中文网](<a class="link"   href="https://studygolang.com/" >首页 - Go语言中文网 - Golang中文社区 (studygolang.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)</p>
+<p>[Golang语言标准库文档](<a class="link"   href="https://studygolang.com/pkgdoc" >Go语言标准库文档中文版 | Go语言中文网 | Golang中文社区 | Golang中国 (studygolang.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)</p>
+<p>雨痕大大Go程序设计<a class="link"   href="https://www.yuque.com/qyuhen/go" >Go 程序设计 (yuque.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>1.1变量</title>
+    <url>/2023/03/30/1-1%E5%8F%98%E9%87%8F/</url>
+    <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>Go使用关键字var定义变量，与传统编程语言C和Java定义变量不同，Go则将类型放置变量名之后。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x <span class="type">int</span>			<span class="comment">//自动初始化为0</span></span><br><span class="line"><span class="keyword">var</span> y = flase 		<span class="comment">//自动推断为bool类型</span></span><br></pre></td></tr></table></figure></div>
+
+<p>也可一次定义多个变量，包括不同初始值定义不同类型</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x, y <span class="type">int</span>		<span class="comment">//相同类型的多个变量</span></span><br><span class="line"><span class="keyword">var</span> a, s = <span class="number">100</span>, <span class="string">&quot;abc&quot;</span>		<span class="comment">//不同类型的初始化值</span></span><br></pre></td></tr></table></figure></div>
+
+<p>不过依照简便和可读性，也可以按组的方式多行变量定义</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123;</span><br><span class="line">    x, y <span class="type">int</span></span><br><span class="line">    a,s = <span class="number">100</span>, <span class="string">&quot;abc&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="简短模式"><a href="#简短模式" class="headerlink" title="简短模式"></a>简短模式</h2><p>其实除了使用var关键字还可以使用一种更简单的变量定义和初始化语法的方法。如下：</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    x := <span class="number">100</span></span><br><span class="line">    a, s := <span class="number">1</span>, <span class="string">&quot;abc&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>不过需要注意的是，简短模式虽然看似定义简单，但是也有一些<strong>限制</strong>：</p>
+<ul>
+<li>定义变量，同时显式初始化</li>
+<li>不能提供数据类型</li>
+<li>只能用在函数内部</li>
+</ul>
+<p>要记住，简短模式是快速定义一个新变量的方法，<strong>而不是修改变量值的方法</strong>。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> k = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="built_in">println</span>(&amp;k, k)</span><br><span class="line">    k := <span class="string">&quot;200&quot;</span>		<span class="comment">//重新定义和初始化同名局部变量</span></span><br><span class="line">    <span class="built_in">println</span>(&amp;k, k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>输出</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">0x4c5248</span> <span class="number">100</span>		<span class="comment">//对比内存地址，看出是两个不同的变量</span></span><br><span class="line"><span class="number">0xc000069f68</span> <span class="number">200</span></span><br></pre></td></tr></table></figure></div>
+
+<p>但是，简短模式并不总是重新定义变量的，也可能是部分退化的赋值操作</p>
+<p>前提条件是：最少有一个变量被定义，并且必须在同一个作用域</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	k := <span class="number">32</span> <span class="comment">//定义变量简短模式</span></span><br><span class="line">	<span class="built_in">println</span>(&amp;k, k)</span><br><span class="line"></span><br><span class="line">	k, j := <span class="number">200</span>, <span class="string">&quot;abc&quot;</span></span><br><span class="line">    <span class="comment">//k := 200	报错: no new variable on left side of :=</span></span><br><span class="line">	<span class="built_in">println</span>(&amp;k, k)</span><br><span class="line">	<span class="built_in">println</span>(j)</span><br><span class="line">    </span><br><span class="line">    &#123; <span class="comment">//不同作用域，全部视作是新变量定义</span></span><br><span class="line">		k, j := <span class="number">300</span>, <span class="number">300</span></span><br><span class="line">		<span class="built_in">println</span>(&amp;k, k, j)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>输出</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">0xc000069f68</span> <span class="number">32</span></span><br><span class="line"><span class="number">0xc000069f68</span> <span class="number">200</span></span><br><span class="line">abc</span><br><span class="line"><span class="number">0xc000069f60</span> <span class="number">300</span> <span class="number">300</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="多变量赋值"><a href="#多变量赋值" class="headerlink" title="多变量赋值"></a>多变量赋值</h2><p>在进行错变量赋值时，首先计算出所有右值，然后再依次完成赋值操作。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//多变量赋值</span></span><br><span class="line">	a, b := <span class="number">1</span>, <span class="number">2</span></span><br><span class="line">	a, b = b+<span class="number">3</span>, a+<span class="number">2</span></span><br><span class="line">	<span class="built_in">println</span>(a, b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>输出</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">5</span> <span class="number">3</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="未使用错误"><a href="#未使用错误" class="headerlink" title="未使用错误"></a>未使用错误</h2><p>顾名思义，编译器将创建的并且未使用的<strong>局部变量</strong>当作错误，但是全局变量不做规范。</p>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
   </entry>
 </search>
