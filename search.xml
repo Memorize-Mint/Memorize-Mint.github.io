@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>1-2常量</title>
+    <url>/2023/03/30/1-2%E5%B8%B8%E9%87%8F/</url>
+    <content><![CDATA[<p> 常量的定义与变量的定义类似:</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> x1, y1 <span class="type">int</span> = <span class="number">123</span>, <span class="number">0x22</span></span><br><span class="line"><span class="keyword">const</span> s1 = <span class="string">&quot;hello,world&quot;</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	i, f = <span class="number">1</span>, <span class="number">0.123</span>		<span class="comment">//int, float(默认)</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+
+<p>可在代码块中定义常量，不曾使用的常量不会引发编译错误</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">const</span> x =<span class="number">123</span></span><br><span class="line">    <span class="built_in">println</span>(x)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> y = <span class="number">1.23</span>		<span class="comment">//未使用不会引发编译错误</span></span><br><span class="line">    </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">const</span> x = <span class="string">&quot;abc&quot;</span>		<span class="comment">//在不同作用域定义同名变量</span></span><br><span class="line">        <span class="built_in">println</span>(x)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>输出</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">123</span></span><br><span class="line">abc</span><br></pre></td></tr></table></figure></div>
+
+<p>如果显式指定类型，必须确保常量左右值类型一致，需要时可做显式转换，<br>右键不能超出常量类型取值范围，否则会引发溢出错</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   x, k <span class="type">int</span>  = <span class="number">99</span>, <span class="number">-999</span></span><br><span class="line">   b    <span class="type">byte</span> = <span class="type">byte</span>(x)</span><br><span class="line">   <span class="comment">//x 为int类型，须显式转换byte类型</span></span><br><span class="line">   <span class="comment">//n = unit8(y)  错误  -999 overflows unit8</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+
+<p>常量也可以是某些编译器能计算出结果的表达式</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   ptrSize = unsafe.Sizeof(<span class="type">uintptr</span>(<span class="number">0</span>))</span><br><span class="line">   strSize = <span class="built_in">len</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">   <span class="comment">//uintptr 是 uint8 的别名，在所有方面都等效于 uint8。</span></span><br><span class="line">   <span class="comment">//按照惯例，它用于区分字节值和 8 位无符号整数值。</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;ptrSize: &quot;</span>, ptrSize) 	<span class="comment">//8</span></span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;strSize: &quot;</span>, strSize) 	<span class="comment">//11</span></span><br></pre></td></tr></table></figure></div>
+
+<p>在常量组中如果不指定类型和初始值，<br>则与上一行非空常值右值(表达式文本)相同</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   x2 <span class="type">uint16</span> = <span class="number">120</span></span><br><span class="line">   y2</span><br><span class="line">   s2 = <span class="string">&quot;abc&quot;</span></span><br><span class="line">   z2</span><br><span class="line">)</span><br><span class="line">fmt.Printf(<span class="string">&quot;%T,%v\n&quot;</span>, y2, y2) 	<span class="comment">//uint16,120</span></span><br><span class="line">fmt.Printf(<span class="string">&quot;%T,%v\n&quot;</span>, z2, z2) 	<span class="comment">//string,abc</span></span><br></pre></td></tr></table></figure></div>
+
+<p>常量除了只读外，不同于变量可以定义运行期分配储存内存<br>常量通常会被编译器在预处理阶段直接展开，作为指令数据使用。</p>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>1-1变量</title>
     <url>/2023/03/30/1-1%E5%8F%98%E9%87%8F/</url>
     <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>Go使用关键字var定义变量，与传统编程语言C和Java定义变量不同，Go则将类型放置变量名之后。</p>
@@ -41,36 +71,6 @@
 <div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">5</span> <span class="number">3</span></span><br></pre></td></tr></table></figure></div>
 
 <h2 id="未使用错误"><a href="#未使用错误" class="headerlink" title="未使用错误"></a>未使用错误</h2><p>顾名思义，编译器将创建的并且未使用的<strong>局部变量</strong>当作错误，但是全局变量不做规范。</p>
-]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-      <tags>
-        <tag>Golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>1-2常量</title>
-    <url>/2023/03/30/1-2%E5%B8%B8%E9%87%8F/</url>
-    <content><![CDATA[<p> 常量的定义与变量的定义类似:</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> x1, y1 <span class="type">int</span> = <span class="number">123</span>, <span class="number">0x22</span></span><br><span class="line"><span class="keyword">const</span> s1 = <span class="string">&quot;hello,world&quot;</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	i, f = <span class="number">1</span>, <span class="number">0.123</span>		<span class="comment">//int, float(默认)</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
-
-<p>可在代码块中定义常量，不曾使用的常量不会引发编译错误</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">const</span> x =<span class="number">123</span></span><br><span class="line">    <span class="built_in">println</span>(x)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> y = <span class="number">1.23</span>		<span class="comment">//未使用不会引发编译错误</span></span><br><span class="line">    </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">const</span> x = <span class="string">&quot;abc&quot;</span>		<span class="comment">//在不同作用域定义同名变量</span></span><br><span class="line">        <span class="built_in">println</span>(x)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>输出</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">123</span></span><br><span class="line">abc</span><br></pre></td></tr></table></figure></div>
-
-<p>如果显式指定类型，必须确保常量左右值类型一致，需要时可做显式转换，<br>右键不能超出常量类型取值范围，否则会引发溢出错</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   x, k <span class="type">int</span>  = <span class="number">99</span>, <span class="number">-999</span></span><br><span class="line">   b    <span class="type">byte</span> = <span class="type">byte</span>(x)</span><br><span class="line">   <span class="comment">//x 为int类型，须显式转换byte类型</span></span><br><span class="line">   <span class="comment">//n = unit8(y)  错误  -999 overflows unit8</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
-
-<p>常量也可以是某些编译器能计算出结果的表达式</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   ptrSize = unsafe.Sizeof(<span class="type">uintptr</span>(<span class="number">0</span>))</span><br><span class="line">   strSize = <span class="built_in">len</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">   <span class="comment">//uintptr 是 uint8 的别名，在所有方面都等效于 uint8。</span></span><br><span class="line">   <span class="comment">//按照惯例，它用于区分字节值和 8 位无符号整数值。</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;ptrSize: &quot;</span>, ptrSize) 	<span class="comment">//8</span></span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;strSize: &quot;</span>, strSize) 	<span class="comment">//11</span></span><br></pre></td></tr></table></figure></div>
-
-<p>在常量组中如果不指定类型和初始值，<br>则与上一行非空常值右值(表达式文本)相同</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   x2 <span class="type">uint16</span> = <span class="number">120</span></span><br><span class="line">   y2</span><br><span class="line">   s2 = <span class="string">&quot;abc&quot;</span></span><br><span class="line">   z2</span><br><span class="line">)</span><br><span class="line">fmt.Printf(<span class="string">&quot;%T,%v\n&quot;</span>, y2, y2) 	<span class="comment">//uint16,120</span></span><br><span class="line">fmt.Printf(<span class="string">&quot;%T,%v\n&quot;</span>, z2, z2) 	<span class="comment">//string,abc</span></span><br></pre></td></tr></table></figure></div>
-
-<p>常量除了只读外，不同于变量可以定义运行期分配储存内存<br>常量通常会被编译器在预处理阶段直接展开，作为指令数据使用。</p>
 ]]></content>
       <categories>
         <category>Golang</category>
@@ -201,6 +201,27 @@
       </tags>
   </entry>
   <entry>
+    <title>2-1保留字</title>
+    <url>/2023/04/03/2-1%E4%BF%9D%E7%95%99%E5%AD%97/</url>
+    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Go语言保留字仅25个，相比其他语言简洁不少。</p>
+<p>包管理（2个）：</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span>	 <span class="keyword">package</span> </span><br></pre></td></tr></table></figure></div>
+
+<p>程序实体声明与定义（8个）： </p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">chan</span>	<span class="keyword">const</span>	<span class="function"><span class="keyword">func</span>	<span class="title">interface</span>	<span class="title">map</span>	 <span class="title">struct</span>	 <span class="title">type</span>  <span class="title">var</span></span> </span><br></pre></td></tr></table></figure></div>
+
+<p>程序流程控制（15个）： break	case	continue	default	defer	else	fallthrough	 for		go		goto		if		range	return	select		switch</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">break</span>	<span class="keyword">case</span>	<span class="keyword">continue</span>	<span class="keyword">default</span>		<span class="keyword">defer</span>	<span class="keyword">else</span>	<span class="keyword">fallthrough</span>	 <span class="keyword">for</span>	<span class="keyword">go</span>		<span class="keyword">goto</span>		<span class="keyword">if</span>		<span class="keyword">range</span>	<span class="keyword">return</span>	<span class="keyword">select</span>		<span class="keyword">switch</span></span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2-2运算符</title>
     <url>/2023/04/03/2-2%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
     <content><![CDATA[<h2 id="二元运算符"><a href="#二元运算符" class="headerlink" title="二元运算符"></a>二元运算符</h2><p>操作类型必须相同，如果声明了一个无显示类型的常量，那么该常量操作数会自动转型。</p>
@@ -319,30 +340,21 @@
       </tags>
   </entry>
   <entry>
-    <title>2-1保留字</title>
-    <url>/2023/04/03/2-1%E4%BF%9D%E7%95%99%E5%AD%97/</url>
-    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Go语言保留字仅25个，相比其他语言简洁不少。</p>
-<p>包管理（2个）：</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span>	 <span class="keyword">package</span> </span><br></pre></td></tr></table></figure></div>
+    <title>3-1init函数</title>
+    <url>/2023/04/03/3-1init%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* init函数的主要特点：</span></span><br><span class="line"><span class="comment">* init函数先于main函数自动执行，不能被其他函数调用；</span></span><br><span class="line"><span class="comment">* init函数没有输入参数、返回值；</span></span><br><span class="line"><span class="comment">* 每个包可以有多个init函数；</span></span><br><span class="line"><span class="comment">* 包的每个源文件也可以有多个init函数，这点比较特殊；</span></span><br><span class="line"><span class="comment">* 同一个包的init执行顺序，golang没有明确定义，编程时要注意程序不要依赖这个执行顺	序。</span></span><br><span class="line"><span class="comment">* 同一个包的不同源文件的init函数执行顺序时该源文件名称的字典库</span></span><br><span class="line"><span class="comment">* 不同包的init函数按照包导入的依赖关系决定执行顺序。</span></span><br><span class="line"><span class="comment">* init函数不可以被调用</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></div>
 
-<p>程序实体声明与定义（8个）： </p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">chan</span>	<span class="keyword">const</span>	<span class="function"><span class="keyword">func</span>	<span class="title">interface</span>	<span class="title">map</span>	 <span class="title">struct</span>	 <span class="title">type</span>  <span class="title">var</span></span> </span><br></pre></td></tr></table></figure></div>
-
-<p>程序流程控制（15个）： break	case	continue	default	defer	else	fallthrough	 for		go		goto		if		range	return	select		switch</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">break</span>	<span class="keyword">case</span>	<span class="keyword">continue</span>	<span class="keyword">default</span>		<span class="keyword">defer</span>	<span class="keyword">else</span>	<span class="keyword">fallthrough</span>	 <span class="keyword">for</span>	<span class="keyword">go</span>		<span class="keyword">goto</span>		<span class="keyword">if</span>		<span class="keyword">range</span>	<span class="keyword">return</span>	<span class="keyword">select</span>		<span class="keyword">switch</span></span><br></pre></td></tr></table></figure></div>
-
+<p><strong>补充go的程序初始化</strong><br>golang程序初始化先于main函数执行，由runtime进行初始化，初始化顺序如下：</p>
+<ol>
+<li><p>初始化导入的包（包的初始化顺序<strong>并不是</strong>按导入顺序（“从上到下”）执行的，runtime需要解析包依赖关系，没有依赖的包最先初始化，与变量初始化依赖关系类似，参见golang变量的初始化）；</p>
+</li>
+<li><p>初始化包作用域的变量（该作用域的变量的初始化也并非按照“从上到下、从左到右”的顺序，runtime解析变量依赖关系，没有依赖的变量最先初始化，参见golang变量的初始化）；</p>
+</li>
+<li><p>执行包的init函数</p>
+</li>
+</ol>
+<p>具体参考该网址<a class="link"   href="https://zhuanlan.zhihu.com/p/34211611%E7%90%86%E8%A7%A3%E8%B0%83%E7%94%A8%E9%A1%BA%E5%BA%8F" >https://zhuanlan.zhihu.com/p/34211611理解调用顺序 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 ]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-      <tags>
-        <tag>Golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>3-1函数定义</title>
-    <url>/2023/04/03/3-1%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89/</url>
-    <content><![CDATA[]]></content>
       <categories>
         <category>Golang</category>
       </categories>
