@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>1.1变量</title>
+    <title>1-1变量</title>
     <url>/2023/03/30/1-1%E5%8F%98%E9%87%8F/</url>
     <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>Go使用关键字var定义变量，与传统编程语言C和Java定义变量不同，Go则将类型放置变量名之后。</p>
 <div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x <span class="type">int</span>			<span class="comment">//自动初始化为0</span></span><br><span class="line"><span class="keyword">var</span> y = flase 		<span class="comment">//自动推断为bool类型</span></span><br></pre></td></tr></table></figure></div>
@@ -50,7 +50,7 @@
       </tags>
   </entry>
   <entry>
-    <title>1.2常量</title>
+    <title>1-2常量</title>
     <url>/2023/03/30/1-2%E5%B8%B8%E9%87%8F/</url>
     <content><![CDATA[<p> 常量的定义与变量的定义类似:</p>
 <div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> x1, y1 <span class="type">int</span> = <span class="number">123</span>, <span class="number">0x22</span></span><br><span class="line"><span class="keyword">const</span> s1 = <span class="string">&quot;hello,world&quot;</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	i, f = <span class="number">1</span>, <span class="number">0.123</span>		<span class="comment">//int, float(默认)</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
@@ -80,90 +80,7 @@
       </tags>
   </entry>
   <entry>
-    <title>1.4引用类型</title>
-    <url>/2023/03/30/1-4%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<p>所谓引用类型特指slice、map、channel这三种预定义类型。</p>
-<p>拥有更复杂的存储结构，除了分配内存外，它们还须初始化一些了属性，</p>
-<p>诸如指针、长度、甚至包括哈希分布】数据队列等。</p>
-<p>内置函数<strong>new</strong>按指定类型长度分配0值内存，返回指针，并不关系你类型内部构造和初始化方式。</p>
-<p>而引用类型则必须使用<strong>make</strong>函数创建，编译器会将转换为目标类型专用的创造函数(或指令)，以确保完成全部内存分配和相关属性初始化。</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkslice</span><span class="params">()</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">    s := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">    s = <span class="built_in">append</span>(s, <span class="number">100</span>)</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkmap</span><span class="params">()</span></span> <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span> &#123;</span><br><span class="line">    m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)</span><br><span class="line">    m[<span class="string">&quot;a&quot;</span>] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> m</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    p := <span class="built_in">new</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)	<span class="comment">//函数new返回指针</span></span><br><span class="line">    m := *p</span><br><span class="line">    fmt.Println(m)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>虽然new函数为引用类型分配内存，但是是不完整创建。</p>
-<p>仅分配了所需内存用指针包装，并没有分配键值存储内存，也没有初始化散列桶等内部属性，无法正常工作。</p>
-]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-      <tags>
-        <tag>Golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>1.6自定义类型</title>
-    <url>/2023/03/30/1-6%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<p> 使用type关键字定义用户自定义类型，包括基于现有基础类型创建，或是结构体、函数类型等。</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> flags <span class="type">byte</span></span><br><span class="line"><span class="keyword">type</span> ( <span class="comment">//组</span></span><br><span class="line">   user <span class="keyword">struct</span> &#123; <span class="comment">//结构体</span></span><br><span class="line">      name <span class="type">string</span></span><br><span class="line">      age  <span class="type">int</span></span><br><span class="line">   &#125;</span><br><span class="line">   event <span class="function"><span class="keyword">func</span><span class="params">(<span class="type">string</span>)</span></span> <span class="type">bool</span> <span class="comment">//函数类型</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
-
-<p>即便指定了相同的基础类型，也只能表明他们拥有相同的底层数据类型结构，<br>二者不存在任何关系，属于完全不用的类型。<br>自定义类型不会继承基础类型的其他信息，包括方法，不能视为别名<br>不能隐式转换，不能直接用于比较表达式</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> data <span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> d data = <span class="number">10</span></span><br><span class="line"><span class="keyword">var</span> x <span class="type">int</span> = d   <span class="comment">//错误</span></span><br><span class="line"><span class="built_in">println</span>(x)</span><br><span class="line"><span class="built_in">println</span>(d == x)  <span class="comment">//错误</span></span><br></pre></td></tr></table></figure></div>
-
-<p>最后介绍位掩码</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   <span class="comment">//位掩码表达式      		移动位数</span></span><br><span class="line">   read  flags = <span class="number">1</span> &lt;&lt; <span class="literal">iota</span> <span class="comment">// 1 &lt;&lt; 0 00000001</span></span><br><span class="line">   write                   <span class="comment">// 1 &lt;&lt; 1 00000010</span></span><br><span class="line">   exec                    <span class="comment">// 1 &lt;&lt; 2 00000100</span></span><br><span class="line">   eee                     <span class="comment">// 1 &lt;&lt; 3 00001000</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
-]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-      <tags>
-        <tag>Golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>1.5类型转换</title>
-    <url>/2023/03/30/1-5%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
-    <content><![CDATA[<p> Go强制要求使用显式类型转换，而且不支持操作符重载</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">a1 := <span class="number">10</span></span><br><span class="line">b1 := <span class="type">byte</span>(a1)</span><br><span class="line">c1 := a1 + <span class="type">int</span>(b1)	<span class="comment">//混合类型表达式必须保持一致</span></span><br></pre></td></tr></table></figure></div>
-
-<p>不能将非bool类型结果当作true&#x2F;false</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">x2 := <span class="number">100</span></span><br><span class="line"><span class="keyword">var</span> c2 <span class="type">bool</span> = x2	<span class="comment">//错误</span></span><br><span class="line"><span class="keyword">if</span> x2 &#123;				<span class="comment">//错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>如果转换目标是指针类型、单项通道或没有返回值的函数类型，<br>那么必须使用括号，以避免造成语法分解的错误</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">p := (*<span class="type">int</span>)(&amp;x2)</span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;p: &quot;</span>, *p)</span><br></pre></td></tr></table></figure></div>
-]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-      <tags>
-        <tag>Golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>1.7未命名类型</title>
-    <url>/2023/03/30/1-7%E6%9C%AA%E5%91%BD%E5%90%8D%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>与明确标识符的 bool int string 等类型相比，<br>数组，切片，字典，通道等类型与具体元素类型或长度等属性有关，<br>所以成为未命名类型 ( unname  2_type)，<br>当然，可用type为其提供具体名称，<br>将其改变为命名变量 (name  2_type)</p>
-<p><strong>具有相同声明的未命名类型被视作统一的类型:</strong></p>
-<ul>
-<li>具有相同基类型指针</li>
-</ul>
-<ul>
-<li>具有相同元素类型和长度的数组（array）</li>
-<li>具有相同元素类型的切片（slice）</li>
-<li>具有相同键值类型的字典（map）</li>
-<li>具有相同数据类型及操作方向的通道（channel）</li>
-<li>具有相同字段序列（字段名、字段类型、标签、以及字段顺序）的结构体（struct）</li>
-<li>具有相同签名（参数和返回值列表，不包括参数名）的函数（func）</li>
-<li>具有相同方法集（方法名，方法签名，不包括顺序）的接口（interface）</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Golang</category>
-      </categories>
-      <tags>
-        <tag>Golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>1.3枚举</title>
+    <title>1-3枚举</title>
     <url>/2023/03/30/1-3%E6%9E%9A%E4%B8%BE/</url>
     <content><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>由于以后的案例可能会经常运用到枚举，</p>
 <p>所以提前带大家了解iota标识符。</p>
@@ -201,18 +118,80 @@
       </tags>
   </entry>
   <entry>
-    <title>2-1保留字</title>
-    <url>/2023/04/03/2-1%E4%BF%9D%E7%95%99%E5%AD%97/</url>
-    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Go语言保留字仅25个，相比其他语言简洁不少。</p>
-<p>包管理（2个）：</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span>	 <span class="keyword">package</span> </span><br></pre></td></tr></table></figure></div>
+    <title>1-4引用类型</title>
+    <url>/2023/03/30/1-4%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p>所谓引用类型特指slice、map、channel这三种预定义类型。</p>
+<p>拥有更复杂的存储结构，除了分配内存外，它们还须初始化一些了属性，</p>
+<p>诸如指针、长度、甚至包括哈希分布】数据队列等。</p>
+<p>内置函数<strong>new</strong>按指定类型长度分配0值内存，返回指针，并不关系你类型内部构造和初始化方式。</p>
+<p>而引用类型则必须使用<strong>make</strong>函数创建，编译器会将转换为目标类型专用的创造函数(或指令)，以确保完成全部内存分配和相关属性初始化。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkslice</span><span class="params">()</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">    s := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line">    s = <span class="built_in">append</span>(s, <span class="number">100</span>)</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mkmap</span><span class="params">()</span></span> <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span> &#123;</span><br><span class="line">    m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)</span><br><span class="line">    m[<span class="string">&quot;a&quot;</span>] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> m</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    p := <span class="built_in">new</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)	<span class="comment">//函数new返回指针</span></span><br><span class="line">    m := *p</span><br><span class="line">    fmt.Println(m)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
-<p>程序实体声明与定义（8个）： </p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">chan</span>	<span class="keyword">const</span>	<span class="function"><span class="keyword">func</span>	<span class="title">interface</span>	<span class="title">map</span>	 <span class="title">struct</span>	 <span class="title">type</span>  <span class="title">var</span></span> </span><br></pre></td></tr></table></figure></div>
+<p>虽然new函数为引用类型分配内存，但是是不完整创建。</p>
+<p>仅分配了所需内存用指针包装，并没有分配键值存储内存，也没有初始化散列桶等内部属性，无法正常工作。</p>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-5类型转换</title>
+    <url>/2023/03/30/1-5%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
+    <content><![CDATA[<p> Go强制要求使用显式类型转换，而且不支持操作符重载</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">a1 := <span class="number">10</span></span><br><span class="line">b1 := <span class="type">byte</span>(a1)</span><br><span class="line">c1 := a1 + <span class="type">int</span>(b1)	<span class="comment">//混合类型表达式必须保持一致</span></span><br></pre></td></tr></table></figure></div>
 
-<p>程序流程控制（15个）： break	case	continue	default	defer	else	fallthrough	 for		go		goto		if		range	return	select		switch</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">break</span>	<span class="keyword">case</span>	<span class="keyword">continue</span>	<span class="keyword">default</span>		<span class="keyword">defer</span>	<span class="keyword">else</span>	<span class="keyword">fallthrough</span>	 <span class="keyword">for</span>	<span class="keyword">go</span>		<span class="keyword">goto</span>		<span class="keyword">if</span>		<span class="keyword">range</span>	<span class="keyword">return</span>	<span class="keyword">select</span>		<span class="keyword">switch</span></span><br></pre></td></tr></table></figure></div>
+<p>不能将非bool类型结果当作true&#x2F;false</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">x2 := <span class="number">100</span></span><br><span class="line"><span class="keyword">var</span> c2 <span class="type">bool</span> = x2	<span class="comment">//错误</span></span><br><span class="line"><span class="keyword">if</span> x2 &#123;				<span class="comment">//错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
+<p>如果转换目标是指针类型、单项通道或没有返回值的函数类型，<br>那么必须使用括号，以避免造成语法分解的错误</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">p := (*<span class="type">int</span>)(&amp;x2)</span><br><span class="line"><span class="built_in">println</span>(<span class="string">&quot;p: &quot;</span>, *p)</span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-6自定义类型</title>
+    <url>/2023/03/30/1-6%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p> 使用type关键字定义用户自定义类型，包括基于现有基础类型创建，或是结构体、函数类型等。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> flags <span class="type">byte</span></span><br><span class="line"><span class="keyword">type</span> ( <span class="comment">//组</span></span><br><span class="line">   user <span class="keyword">struct</span> &#123; <span class="comment">//结构体</span></span><br><span class="line">      name <span class="type">string</span></span><br><span class="line">      age  <span class="type">int</span></span><br><span class="line">   &#125;</span><br><span class="line">   event <span class="function"><span class="keyword">func</span><span class="params">(<span class="type">string</span>)</span></span> <span class="type">bool</span> <span class="comment">//函数类型</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+
+<p>即便指定了相同的基础类型，也只能表明他们拥有相同的底层数据类型结构，<br>二者不存在任何关系，属于完全不用的类型。<br>自定义类型不会继承基础类型的其他信息，包括方法，不能视为别名<br>不能隐式转换，不能直接用于比较表达式</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> data <span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> d data = <span class="number">10</span></span><br><span class="line"><span class="keyword">var</span> x <span class="type">int</span> = d   <span class="comment">//错误</span></span><br><span class="line"><span class="built_in">println</span>(x)</span><br><span class="line"><span class="built_in">println</span>(d == x)  <span class="comment">//错误</span></span><br></pre></td></tr></table></figure></div>
+
+<p>最后介绍位掩码</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">   <span class="comment">//位掩码表达式      		移动位数</span></span><br><span class="line">   read  flags = <span class="number">1</span> &lt;&lt; <span class="literal">iota</span> <span class="comment">// 1 &lt;&lt; 0 00000001</span></span><br><span class="line">   write                   <span class="comment">// 1 &lt;&lt; 1 00000010</span></span><br><span class="line">   exec                    <span class="comment">// 1 &lt;&lt; 2 00000100</span></span><br><span class="line">   eee                     <span class="comment">// 1 &lt;&lt; 3 00001000</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1-7未命名类型</title>
+    <url>/2023/03/30/1-7%E6%9C%AA%E5%91%BD%E5%90%8D%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>与明确标识符的 bool int string 等类型相比，<br>数组，切片，字典，通道等类型与具体元素类型或长度等属性有关，<br>所以成为未命名类型 ( unname  2_type)，<br>当然，可用type为其提供具体名称，<br>将其改变为命名变量 (name  2_type)</p>
+<p><strong>具有相同声明的未命名类型被视作统一的类型:</strong></p>
+<ul>
+<li>具有相同基类型指针</li>
+</ul>
+<ul>
+<li>具有相同元素类型和长度的数组（array）</li>
+<li>具有相同元素类型的切片（slice）</li>
+<li>具有相同键值类型的字典（map）</li>
+<li>具有相同数据类型及操作方向的通道（channel）</li>
+<li>具有相同字段序列（字段名、字段类型、标签、以及字段顺序）的结构体（struct）</li>
+<li>具有相同签名（参数和返回值列表，不包括参数名）的函数（func）</li>
+<li>具有相同方法集（方法名，方法签名，不包括顺序）的接口（interface）</li>
+</ul>
 ]]></content>
       <categories>
         <category>Golang</category>
@@ -268,6 +247,102 @@
 
 <div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">//初始化</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">type</span> data <span class="keyword">struct</span> &#123;</span><br><span class="line">      x <span class="type">int</span></span><br><span class="line">      s <span class="type">string</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> a data = data&#123;<span class="number">1</span>, <span class="string">&quot;abc&quot;</span>&#125;</span><br><span class="line">	<span class="comment">//注意看逗号 ,</span></span><br><span class="line">   b := data&#123;</span><br><span class="line">      <span class="number">1</span>,</span><br><span class="line">      <span class="string">&quot;abc&quot;</span>,</span><br><span class="line">   &#125;</span><br><span class="line">   c := []<span class="type">int</span>&#123;</span><br><span class="line">      <span class="number">1</span>,</span><br><span class="line">      <span class="number">2</span>&#125;</span><br><span class="line">   d := []<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>,</span><br><span class="line">      <span class="number">3</span>, <span class="number">4</span>,</span><br><span class="line">      <span class="number">5</span>,</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">println</span>(a, b, c, d) <span class="comment">//这样并不能输出只是为了程序存放不报错</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 ]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-4控制流语句</title>
+    <url>/2023/04/03/2-4%E6%8E%A7%E5%88%B6%E6%B5%81%E8%AF%AD%E5%8F%A5/</url>
+    <content><![CDATA[<p> 按照雨痕大大的原话说：</p>
+<p>Go精简了流控制语句，某些时候不够便捷，但够用。</p>
+<h2 id="if…else…"><a href="#if…else…" class="headerlink" title="if…else…"></a>if…else…</h2><p>条件表达式值必须是布尔类型，可省略括号，且左花括号不能另起一行。</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	x := <span class="number">3</span></span><br><span class="line">	<span class="keyword">if</span> x &gt; <span class="number">5</span> &#123;</span><br><span class="line">		<span class="built_in">println</span>(<span class="string">&quot;a&quot;</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> x &lt; <span class="number">5</span> &amp;&amp; x &gt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="built_in">println</span>(<span class="string">&quot;b&quot;</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">println</span>(<span class="string">&quot;z&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h2><p>与if类似，switch语句也用于选择执行，但具体使用场景会有所不同</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    x := <span class="number">3</span></span><br><span class="line">    y := <span class="number">7</span></span><br><span class="line">    <span class="keyword">switch</span> x &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">		<span class="built_in">println</span>(<span class="string">&quot;a&quot;</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">		<span class="built_in">println</span>(<span class="string">&quot;b&quot;</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">3</span>, y: 			<span class="comment">//多个匹配条件命中其一即可(OR)变量</span></span><br><span class="line">		<span class="built_in">println</span>(<span class="string">&quot;c&quot;</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">4</span>:			<span class="comment">//常量</span></span><br><span class="line">		<span class="built_in">println</span>(<span class="string">&quot;d&quot;</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">		<span class="built_in">println</span>(<span class="string">&quot;e&quot;</span>)</span><br><span class="line">	<span class="keyword">case</span> a: 	<span class="comment">//单条件，内容为空不构成多条件匹配，隐式&quot;case a: break;&quot;</span></span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		<span class="built_in">println</span>(<span class="string">&quot;f&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>无需显示break语句，case执行完毕后自动中断，如需贯通后续case（源码顺序），</p>
+<p>需要执行fallthrough，但不再匹配后续条件表达式.</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span> &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="literal">false</span>:</span><br><span class="line">		fmt.Println(<span class="string">&quot;The integer was &lt;= 4&quot;</span>)</span><br><span class="line">		<span class="keyword">fallthrough</span>			<span class="comment">//继续执行下一case，但不再匹配条件表达式</span></span><br><span class="line">	<span class="keyword">case</span> <span class="literal">true</span>:</span><br><span class="line">		fmt.Println(<span class="string">&quot;The integer was &lt;= 5&quot;</span>)</span><br><span class="line">		<span class="keyword">fallthrough</span></span><br><span class="line">	<span class="keyword">case</span> <span class="literal">false</span>:</span><br><span class="line">		fmt.Println(<span class="string">&quot;The integer was &lt;= 6&quot;</span>)</span><br><span class="line">		<span class="keyword">fallthrough</span></span><br><span class="line">	<span class="keyword">case</span> <span class="literal">true</span>:</span><br><span class="line">		fmt.Println(<span class="string">&quot;The integer was &lt;= 7&quot;</span>)</span><br><span class="line">		<span class="keyword">fallthrough</span></span><br><span class="line">	<span class="keyword">case</span> <span class="literal">false</span>:</span><br><span class="line">		fmt.Println(<span class="string">&quot;The integer was &lt;= 8&quot;</span>)</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		fmt.Println(<span class="string">&quot;default case&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line">result:</span><br><span class="line">		The integer was &lt;= <span class="number">5</span></span><br><span class="line">		The integer was &lt;= <span class="number">6</span></span><br><span class="line">		The integer was &lt;= <span class="number">7</span></span><br><span class="line">		The integer was &lt;= <span class="number">8</span></span><br></pre></td></tr></table></figure></div>
+
+<p>fallthrough必须放在case快的结尾，可使用break提前阻止。</p>
+<h2 id="for"><a href="#for" class="headerlink" title="for"></a>for</h2><div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">3</span>; i++ &#123;</span><br><span class="line">&#125;</span><br><span class="line">x := <span class="number">10</span></span><br><span class="line"><span class="keyword">for</span> x &lt; <span class="number">20</span> &#123; 		<span class="comment">//类似while x &lt; 20 &#123;&#125; 或 for ; x&lt;20; &#123;&#125;</span></span><br><span class="line">   x++</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> &#123; 		<span class="comment">//类似while true&#123;&#125; 或者 for true &#123;&#125;</span></span><br><span class="line">   <span class="keyword">break</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>初始化语句仅被执行一次，条件表达式中如果有函数调用，<br>需要确认是否重复执行，可能会被编译器优化掉，也可能是动态结果须每次执行确认.</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i, c := <span class="number">0</span>, count(); i &lt; c; i++ &#123; <span class="comment">//初始化语句count仅被执行一次</span></span><br><span class="line">	<span class="built_in">println</span>(<span class="string">&quot;a&quot;</span>, i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">c := <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> c &lt; count() &#123; <span class="comment">//条件表达式中的count重复执行</span></span><br><span class="line">	<span class="built_in">println</span>(<span class="string">&quot;b&quot;</span>, c)</span><br><span class="line">	c++</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>可用for…range 完成数据迭代</p>
+<p>支持字符串、数组、数组指针、切片、通道类型、返回索引、键值数据</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    </span><br><span class="line">    data := [<span class="number">3</span>]<span class="type">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>&#125;</span><br><span class="line">	<span class="keyword">for</span> i, s := <span class="keyword">range</span> data &#123;</span><br><span class="line">		<span class="built_in">println</span>(i, s)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>允许返回单值，或者用 “_” 忽略</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="keyword">range</span> data &#123; 		<span class="comment">//只返回 1st value</span></span><br><span class="line">		<span class="built_in">println</span>(i, data[i])</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, s := <span class="keyword">range</span> data &#123; 	<span class="comment">//忽略 1st value</span></span><br><span class="line">		<span class="built_in">println</span>(s)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//无论是for循环还是range迭代，其定义的局部变量都会重复使用</span></span><br><span class="line">	<span class="keyword">for</span> i, s := <span class="keyword">range</span> data &#123;</span><br><span class="line">		<span class="built_in">println</span>(&amp;i, &amp;s)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>输出：</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span> a</span><br><span class="line"><span class="number">1</span> b</span><br><span class="line"><span class="number">2</span> c</span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br></pre></td></tr></table></figure></div>
+
+<p>注意range会复制目标数据，受直接影响的是数组，可改用数组指针或切片类型</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	data := [<span class="number">3</span>]<span class="type">int</span>&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>&#125;</span><br><span class="line">	<span class="keyword">for</span> i, x := <span class="keyword">range</span> data &#123; 	<span class="comment">//从data 复制品中取值</span></span><br><span class="line">   		<span class="keyword">if</span> i == <span class="number">0</span> &#123;</span><br><span class="line">      		data[<span class="number">0</span>] += <span class="number">100</span></span><br><span class="line">      		data[<span class="number">1</span>] += <span class="number">200</span></span><br><span class="line">      		data[<span class="number">2</span>] += <span class="number">300</span></span><br><span class="line">   		&#125;</span><br><span class="line">   	fmt.Printf(<span class="string">&quot;x: %d, data: %d\n&quot;</span>, x, data[i])</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>输出：</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">x: <span class="number">10</span>, data: <span class="number">110</span></span><br><span class="line">x: <span class="number">20</span>, data: <span class="number">220</span></span><br><span class="line">x: <span class="number">30</span>, data: <span class="number">330</span></span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i, x := <span class="keyword">range</span> data[:] &#123; <span class="comment">//仅复制slice 不包括底层 array</span></span><br><span class="line">	<span class="keyword">if</span> i == <span class="number">0</span> &#123;</span><br><span class="line">		data[<span class="number">0</span>] += <span class="number">100</span></span><br><span class="line">		data[<span class="number">1</span>] += <span class="number">200</span></span><br><span class="line">		data[<span class="number">2</span>] += <span class="number">300</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;x: %d, data: %d\n&quot;</span>, x, data[i])</span><br><span class="line">	<span class="comment">//当 i==0 修改data时,x已经取值，所以 x是10，data是 110</span></span><br><span class="line">	<span class="comment">//复制的仅是 slice本身 底层 array 仍然是原对象</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="keyword">range</span> data1[:] &#123;</span><br><span class="line">		fmt.Printf(<span class="string">&quot;data: %d\n&quot;</span>, data1[i])</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>输出：</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">x: <span class="number">10</span>, data: <span class="number">110</span></span><br><span class="line">x: <span class="number">220</span>, data: <span class="number">220</span></span><br><span class="line">x: <span class="number">330</span>, data: <span class="number">330</span></span><br><span class="line">data: <span class="number">110</span></span><br><span class="line">data: <span class="number">220</span></span><br><span class="line">data: <span class="number">330</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>如果range目标表达式是函数调用，也仅被执行一次</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">data</span><span class="params">()</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">	<span class="built_in">println</span>(<span class="string">&quot;origin data.&quot;</span>)</span><br><span class="line">	<span class="keyword">return</span> []<span class="type">int</span>&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i, x := <span class="keyword">range</span> data() &#123;</span><br><span class="line">   		<span class="built_in">println</span>(i, x)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>输出：</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">origin data.</span><br><span class="line"><span class="number">0</span> <span class="number">10</span></span><br><span class="line"><span class="number">1</span> <span class="number">20</span></span><br><span class="line"><span class="number">2</span> <span class="number">30</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="goto"><a href="#goto" class="headerlink" title="goto"></a>goto</h2><p>使用goto前，需要先定义标签，标签区分大小写，且未使用的标签会引发编译错误</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	start:   <span class="comment">//错误， 标签start确定没被使用</span></span><br><span class="line"> 		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">3</span>; i++ &#123;</span><br><span class="line">	    	<span class="keyword">if</span> i &gt; <span class="number">1</span> &#123;</span><br><span class="line">	       		<span class="keyword">goto</span> exit</span><br><span class="line">	    	&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	exit:</span><br><span class="line">		<span class="built_in">println</span>(<span class="string">&quot;exit...&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>不能跳转到其他函数，或是内层代码块内</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">test:</span><br><span class="line">	<span class="built_in">println</span>(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">	<span class="built_in">println</span>(<span class="string">&quot;test exit.&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">3</span>; i++ &#123;</span><br><span class="line">	loop:</span><br><span class="line">		<span class="built_in">println</span>(i)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">goto</span> test       <span class="comment">//错误: label tesr not defined</span></span><br><span class="line">	<span class="keyword">goto</span> loop       <span class="comment">//错误: goto loop jumps into block</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>和goto 定点跳转不同，break、continue用于中断代码块执行,</p>
+<p>介于在go中break与continue的使用与其他语言几乎无差别，所以不做多赘述。</p>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2-1保留字</title>
+    <url>/2023/04/03/2-1%E4%BF%9D%E7%95%99%E5%AD%97/</url>
+    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Go语言保留字仅25个，相比其他语言简洁不少。</p>
+<p>包管理（2个）：</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span>	 <span class="keyword">package</span> </span><br></pre></td></tr></table></figure></div>
+
+<p>程序实体声明与定义（8个）： </p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">chan</span>	<span class="keyword">const</span>	<span class="function"><span class="keyword">func</span>	<span class="title">interface</span>	<span class="title">map</span>	 <span class="title">struct</span>	 <span class="title">type</span>  <span class="title">var</span></span> </span><br></pre></td></tr></table></figure></div>
+
+<p>程序流程控制（15个）： break	case	continue	default	defer	else	fallthrough	 for		go		goto		if		range	return	select		switch</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">break</span>	<span class="keyword">case</span>	<span class="keyword">continue</span>	<span class="keyword">default</span>		<span class="keyword">defer</span>	<span class="keyword">else</span>	<span class="keyword">fallthrough</span>	 <span class="keyword">for</span>	<span class="keyword">go</span>		<span class="keyword">goto</span>		<span class="keyword">if</span>		<span class="keyword">range</span>	<span class="keyword">return</span>	<span class="keyword">select</span>		<span class="keyword">switch</span></span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>3-1函数定义</title>
+    <url>/2023/04/03/3-1%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89/</url>
+    <content><![CDATA[]]></content>
       <categories>
         <category>Golang</category>
       </categories>
