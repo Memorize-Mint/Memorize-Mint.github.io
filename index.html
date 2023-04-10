@@ -410,6 +410,72 @@
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2023/04/10/5-3%E6%96%B9%E6%B3%95%E9%9B%86/">
+                        5-3方法集
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                         类型有个与之相关的方法集合，这决定了它是否实现某个接口。
+根据接受参数的不同，可分为T和*T两种视角。
+
+T.set &#x3D; T
+*T.set &#x3D; T + *T
+
+
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Mon Apr 10 2023 16:16:46 GMT+0800">
+                
+                    2023-04-10
+                
+            </span>
+        </span>
+        
+            <span class="home-article-category"><i class="fa-solid fa-folders"></i></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Golang/">Golang</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Golang/">Golang</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2023/04/10/5-3%E6%96%B9%E6%B3%95%E9%9B%86/">Read more<span class="seo-reader-text">5-3方法集</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2023/04/10/5-2%E5%8C%BF%E5%90%8D%E5%AD%97%E6%AE%B5/">
                         5-2匿名字段
                     </a>
@@ -417,7 +483,9 @@
 
                 <div class="home-article-content markdown-body">
                     
-                        
+                         之前在结构体介绍了匿名字段，方法里也可以像访问匿名字段那样调用方法。
+由于方法也有同名遮蔽问题。但利用这种特性，可实现类似覆盖重写操作（override）
+12345678910111213141516171819type user struct&...
                     
                 </div>
 
@@ -965,69 +1033,6 @@ expression
 
             </li>
         
-            <li class="home-article-item">
-
-                
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/04/04/3-5%E8%BF%94%E5%9B%9E%E5%80%BC/">
-                        3-4返回值
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        有返回值的函数，必须有明确的return终止语句
-除非有panic或者无break的死循环，则无须return终止语句
-多返回值模式借鉴自动态语言的多返回值模式，函数得以返回更多形态，以error举例
-123456789101112131415161...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Tue Apr 04 2023 11:44:36 GMT+0800">
-                
-                    2023-04-04
-                
-            </span>
-        </span>
-        
-            <span class="home-article-category"><i class="fa-solid fa-folders"></i></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Golang/">Golang</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/Golang/">Golang</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2023/04/04/3-5%E8%BF%94%E5%9B%9E%E5%80%BC/">Read more<span class="seo-reader-text">3-4返回值</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
     </ul>
 
     <div class="home-paginator">
@@ -1107,7 +1112,7 @@ expression
                     <div class="label">Categories</div>
                 </a>
                 <a class="item" href="/archives">
-                    <div class="number">26</div>
+                    <div class="number">27</div>
                     <div class="label">Posts</div>
                 </a>
             </div>
