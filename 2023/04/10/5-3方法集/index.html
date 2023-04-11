@@ -18,15 +18,15 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="类型有个与之相关的方法集合，这决定了它是否实现某个接口。 根据接受参数的不同，可分为T和*T两种视角。  T.set &#x3D; T *T.set &#x3D; T + *T">
+        <meta name="description" content="每个类型都有与之相关的类型，把这个类型所以方法称为类型的方法集 123456789101112type Student struct &amp;#123;        age int8        name string&amp;#125;func (s Student) showName() &amp;#123;        fmt.Println(s.name)&amp;#125;func (s *Student)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="5-3方法集">
 <meta property="og:url" content="https://memorize-mint.github.io/2023/04/10/5-3%E6%96%B9%E6%B3%95%E9%9B%86/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="类型有个与之相关的方法集合，这决定了它是否实现某个接口。 根据接受参数的不同，可分为T和*T两种视角。  T.set &#x3D; T *T.set &#x3D; T + *T">
+<meta property="og:description" content="每个类型都有与之相关的类型，把这个类型所以方法称为类型的方法集 123456789101112type Student struct &amp;#123;        age int8        name string&amp;#125;func (s Student) showName() &amp;#123;        fmt.Println(s.name)&amp;#125;func (s *Student)">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-04-10T08:16:46.000Z">
-<meta property="article:modified_time" content="2023-04-10T08:30:27.439Z">
+<meta property="article:modified_time" content="2023-04-11T03:40:40.405Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
@@ -400,8 +400,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-04-10 16:30:27</span>
-            <span class="mobile">2023-04-10 16:30</span>
+            <span class="desktop">2023-04-11 11:40:40</span>
+            <span class="mobile">2023-04-11 11:40</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -434,7 +434,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>54 Words</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>115 Words</span>
         </span>
     
     
@@ -451,12 +451,11 @@
             
 
             <div class="article-content markdown-body">
-                <p> 类型有个与之相关的方法集合，这决定了它是否实现某个接口。</p>
-<p>根据接受参数的不同，可分为T和*T两种视角。</p>
-<ul>
-<li>T.set &#x3D; T</li>
-<li>*T.set &#x3D; T + *T</li>
-</ul>
+                <p> 每个类型都有与之相关的类型，把这个类型所以方法称为类型的方法集</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Student <span class="keyword">struct</span> &#123;</span><br><span class="line">        age <span class="type">int8</span></span><br><span class="line">        name <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s Student)</span></span> showName() &#123;</span><br><span class="line">        fmt.Println(s.name)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Student)</span></span> setName(newName <span class="type">string</span>) &#123;</span><br><span class="line">        s.name = newName</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 类型Student方法集包含了showName()方法。</span></span><br><span class="line"><span class="comment">// 类型*Student方法集包含了showName()方法和setName()方法。</span></span><br></pre></td></tr></table></figure></div>
+
+<p>● 类型T方法集，包含全部receiver T 方法。</p>
+<p>● 类型*T方法集，包含全部receiver T + *T方法。</p>
 
             </div>
 
@@ -469,7 +468,7 @@
         <li><strong>Created at:</strong> 2023-04-10 16:16:46</li>
         
             <li>
-                <strong>Updated at:</strong> 2023-04-10 16:30:27
+                <strong>Updated at:</strong> 2023-04-11 11:40:40
             </li>
         
         <li>
@@ -498,6 +497,21 @@
 
             
                 <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/04/10/6-1%E6%8E%A5%E5%8F%A3/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">6-1接口</span>
+                                    <span class="post-nav-item">Prev posts</span>
+                                </span>
+                            </a>
+                        </div>
                     
                     
                         <div class="article-next">
